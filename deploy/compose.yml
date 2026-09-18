@@ -1,0 +1,42 @@
+# ============================================================
+# Reachy Mini 图鉴 · 部署用 compose（Hostinger VPS Docker Manager）
+#
+# 用法见 deploy/README.md。要点：
+#   1. 容器把仓库 public/ 同步到 nginx 站点根目录下的 reachy-mini/
+#   2. 站点 bordy.cn 的 nginx 为 `root /var/www/spark-toys;` 且带
+#      try_files 回退，真实目录会优先命中，无需改 nginx
+#   3. compose 会展开 $VAR，shell 变量必须写成 $$VAR
+# ============================================================
+services:
+  deploy:
+    image: alpine:3.20
+    container_name: reachy-mini-deploy
+    volumes:
+      - /var/www:/site
+      - /opt/reachy-mini-guide-src:/src
+    command:
+      - sh
+      - -lc
+      - |
+        set -eu
+        apk add --no-cache git >/dev/null 2>&1
+        mkdir -p /src
+        if [ ! -d /src/repo/.git ]; then
+          rm -rf /src/repo
+          git clone --depth 1 https://github.com/minze131313-cpu/reachy-mini-guide.git /src/repo
+        else
+          cd /src/repo
+          git fetch --depth 1 origin main
+          git checkout -q -B main origin/main
+        fi
+        git -C /src/repo log -1 --format=DEPLOY_COMMIT_%h
+        STAMP=$(date -u +%Y%m%d-%H%M%S)
+        mkdir -p /site/reachy-mini/releases/$$STAMP
+        cp -a /src/repo/public/. /site/reachy-mini/releases/$$STAMP/
+        ln -sfn releases/$$STAMP /site/reachy-mini/current
+        rm -rf /site/spark-toys/reachy-mini
+        mkdir -p /site/spark-toys/reachy-mini
+        cp -a /src/repo/public/. /site/spark-toys/reachy-mini/
+        echo "FILES=$(find /site/spark-toys/reachy-mini -type f | wc -l)"
+        test -f /site/spark-toys/reachy-mini/index.html
+        echo REACHY_DEPLOY_READY

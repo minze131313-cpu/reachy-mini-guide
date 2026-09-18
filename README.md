@@ -16,9 +16,13 @@ Hugging Face × Pollen Robotics × Seeed Studio 的开源桌面机器人 **Reach
 
 ## 部署
 
-线上由 Hostinger VPS 上的 nginx 直接托管静态文件：仓库 `public/` 目录同步到
-`/var/www/bordy.cn/reachy-mini/`。nginx 站点 `bordy.cn` 的配置为 `root /var/www/bordy.cn;`，
-无额外 location 规则，因此新增子目录无需改动 nginx 配置。
+线上由 Hostinger VPS 上的 nginx 直接托管静态文件：仓库 `public/` 同步到
+`/var/www/spark-toys/reachy-mini/`（`bordy.cn` 站点根目录下的子目录）。
+因为站点已有 `try_files $uri $uri/ /index.html` 回退，真实目录会优先命中，
+**无需修改任何 nginx 配置**。
+
+完整拓扑、更新步骤与踩坑记录见 [`deploy/README.md`](deploy/README.md)，
+部署用 compose 见 [`deploy/compose.yml`](deploy/compose.yml)。
 
 ## 数据说明
 
