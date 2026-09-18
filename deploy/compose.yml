@@ -30,10 +30,6 @@ services:
           git checkout -q -B main origin/main
         fi
         git -C /src/repo log -1 --format=DEPLOY_COMMIT_%h
-        STAMP=$(date -u +%Y%m%d-%H%M%S)
-        mkdir -p /site/reachy-mini/releases/$$STAMP
-        cp -a /src/repo/public/. /site/reachy-mini/releases/$$STAMP/
-        ln -sfn releases/$$STAMP /site/reachy-mini/current
         rm -rf /site/spark-toys/reachy-mini
         mkdir -p /site/spark-toys/reachy-mini
         cp -a /src/repo/public/. /site/spark-toys/reachy-mini/

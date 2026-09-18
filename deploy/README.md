@@ -9,11 +9,8 @@ GitHub minze131313-cpu/reachy-mini-guide
         │  git clone --depth 1（部署容器内）
         ▼
 Hostinger VPS 187.77.25.70 (KVM 2 · Ubuntu 24.04)
-        │  容器把 public/ 同步到两处：
-        ├─ /var/www/reachy-mini/
-        │     ├─ releases/<时间戳>/          ← 不可变历史版本
-        │     └─ current -> releases/<ts>
-        └─ /var/www/spark-toys/reachy-mini/  ← 实际对外服务的目录
+        │  容器把 public/ 同步到：
+        └─ /var/www/spark-toys/reachy-mini/  ← 站点根目录下的独立目录
                        │
         nginx 站点 bordy.cn（配置来自 sites-available/spark-toys.conf）
           root /var/www/spark-toys;
