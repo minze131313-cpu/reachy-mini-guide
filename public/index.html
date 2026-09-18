@@ -1,0 +1,1994 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.className+=" js";</script>
+<title>Reachy Mini 社区应用图鉴 · 从开箱到开发的一站式灵感库</title>
+<meta name="description" content="Reachy Mini 开源桌面机器人社区应用与开发案例精选：74 个 Hugging Face Space 应用、14 个代码项目、硬件规格、SDK 上手与学习路径。">
+<style>
+:root{
+  --bg:#080d18; --bg2:#0d1526; --panel:#111c31; --panel2:#16233c;
+  --line:#22314d; --line2:#2f4262;
+  --tx:#e8eef8; --tx2:#a3b2cc; --tx3:#6f809f;
+  --mint:#2fe0a2; --mint-d:#0f9b6c; --coral:#ff7a4d; --gold:#ffc94d; --violet:#a78bfa; --sky:#4dc3ff;
+  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+  --sans:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;
+  --maxw:1180px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:74px}
+body{
+  margin:0;background:var(--bg);color:var(--tx);font-family:var(--sans);
+  font-size:16px;line-height:1.75;-webkit-font-smoothing:antialiased;
+  background-image:
+    radial-gradient(1100px 620px at 12% -8%,rgba(47,224,162,.14),transparent 62%),
+    radial-gradient(900px 560px at 92% 2%,rgba(255,122,77,.12),transparent 60%),
+    radial-gradient(800px 700px at 50% 110%,rgba(77,195,255,.08),transparent 60%),
+    linear-gradient(180deg,#080d18,#070b14 60%,#080d18);
+  background-attachment:fixed;
+}
+a{color:var(--mint);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+
+/* ---------- 顶栏 ---------- */
+header.top{
+  position:sticky;top:0;z-index:60;backdrop-filter:blur(14px);
+  background:rgba(8,13,24,.82);border-bottom:1px solid var(--line);
+}
+.top .inner{max-width:var(--maxw);margin:0 auto;padding:9px 22px;display:flex;align-items:center;gap:16px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.2px;white-space:nowrap}
+.brand svg{width:26px;height:26px;flex:none}
+.brand span{background:linear-gradient(92deg,var(--mint),var(--sky));-webkit-background-clip:text;background-clip:text;color:transparent}
+nav.top-nav{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;margin-left:auto}
+nav.top-nav::-webkit-scrollbar{display:none}
+nav.top-nav a{color:var(--tx2);font-size:13.5px;padding:6px 11px;border-radius:8px;white-space:nowrap}
+nav.top-nav a:hover{background:var(--panel);color:var(--tx);text-decoration:none}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;padding:74px 0 54px;overflow:hidden}
+.hero .grid-bg{position:absolute;inset:0;pointer-events:none;opacity:.5;
+  background-image:linear-gradient(rgba(47,224,162,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(47,224,162,.05) 1px,transparent 1px);
+  background-size:44px 44px;mask-image:radial-gradient(70% 60% at 50% 30%,#000,transparent 78%)}
+.hero-grid{position:relative;display:grid;grid-template-columns:1.15fr .85fr;gap:44px;align-items:center}
+.kicker{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;letter-spacing:.14em;color:var(--mint);
+  border:1px solid rgba(47,224,162,.34);background:rgba(47,224,162,.08);padding:5px 13px;border-radius:999px;text-transform:uppercase}
+h1{font-size:clamp(34px,5.1vw,57px);line-height:1.12;margin:20px 0 14px;letter-spacing:-.02em;font-weight:800}
+h1 em{font-style:normal;background:linear-gradient(100deg,var(--mint) 5%,var(--sky) 48%,var(--violet));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lede{font-size:17px;color:var(--tx2);max-width:56ch}
+.lede b{color:var(--tx)}
+.hero-stats{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.stat{border:1px solid var(--line);background:linear-gradient(180deg,rgba(22,35,60,.72),rgba(13,21,38,.72));
+  border-radius:14px;padding:12px 17px;min-width:104px}
+.stat b{display:block;font-size:26px;line-height:1.15;font-family:var(--mono);color:var(--mint);letter-spacing:-.02em}
+.stat small{color:var(--tx3);font-size:12px;letter-spacing:.03em}
+.hero-art{position:relative;border:1px solid var(--line);border-radius:20px;overflow:hidden;
+  background:linear-gradient(160deg,rgba(47,224,162,.10),rgba(13,21,38,.6) 45%,rgba(167,139,250,.10))}
+.hero-art img{width:100%;display:block}
+.hero-art .cap{position:absolute;left:0;right:0;bottom:0;padding:10px 14px;font-size:12.5px;color:var(--tx2);
+  background:linear-gradient(0deg,rgba(8,13,24,.92),transparent)}
+.quote{margin-top:20px;font-size:13.5px;color:var(--tx3);font-style:italic}
+
+/* ---------- 通用 section ---------- */
+section{padding:58px 0;scroll-margin-top:74px}
+.sec-head{margin-bottom:30px}
+.sec-head .num{font-family:var(--mono);font-size:12.5px;color:var(--mint);letter-spacing:.2em}
+.sec-head h2{font-size:clamp(24px,3.2vw,33px);margin:8px 0 10px;letter-spacing:-.01em}
+.sec-head p{color:var(--tx2);max-width:74ch;margin:0}
+.divider{height:1px;background:linear-gradient(90deg,transparent,var(--line2),transparent)}
+h3{letter-spacing:-.01em}
+.lead{color:var(--tx2)}
+
+/* ---------- 规格 ---------- */
+.spec-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(232px,1fr));gap:14px}
+.spec{border:1px solid var(--line);border-radius:14px;padding:16px 18px;background:var(--panel)}
+.spec .k{color:var(--tx3);font-size:12.5px;letter-spacing:.05em;text-transform:uppercase;margin-bottom:6px}
+.spec .v{font-size:19px;font-weight:700;font-family:var(--mono);letter-spacing:-.01em}
+.spec .v small{font-size:13px;color:var(--tx2);font-family:var(--sans);font-weight:400}
+.spec .n{font-size:13px;color:var(--tx2);margin-top:5px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
+figure{margin:0;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--panel)}
+figure img{width:100%;display:block;cursor:zoom-in}
+figcaption{padding:11px 15px;font-size:13px;color:var(--tx2);border-top:1px solid var(--line)}
+figcaption b{color:var(--tx)}
+
+/* DOF */
+.dof{display:grid;grid-template-columns:repeat(auto-fit,minmax(168px,1fr));gap:12px;margin-top:8px}
+.dof .d{border:1px solid var(--line);border-left:3px solid var(--mint);border-radius:11px;padding:13px 15px;background:var(--panel)}
+.dof .d.c2{border-left-color:var(--coral)} .dof .d.c3{border-left-color:var(--violet)}
+.dof .d b{font-size:22px;font-family:var(--mono);color:var(--mint)}
+.dof .d.c2 b{color:var(--coral)} .dof .d.c3 b{color:var(--violet)}
+.dof .d span{display:block;font-size:13.5px;color:var(--tx2);margin-top:2px}
+.dof .d em{display:block;font-size:12px;color:var(--tx3);font-style:normal;font-family:var(--mono);margin-top:5px}
+
+table{width:100%;border-collapse:collapse;font-size:14px;margin-top:6px}
+th,td{text-align:left;padding:9px 11px;border-bottom:1px solid var(--line)}
+th{color:var(--tx3);font-weight:600;font-size:12.5px;letter-spacing:.05em;text-transform:uppercase}
+tbody tr:hover{background:rgba(47,224,162,.045)}
+td.mono{font-family:var(--mono);color:var(--mint)}
+
+/* ---------- 图表 ---------- */
+.chart{border:1px solid var(--line);border-radius:16px;background:var(--panel);padding:20px 22px}
+.bar-row{display:grid;grid-template-columns:132px 1fr 46px;align-items:center;gap:12px;margin:7px 0;font-size:13.5px}
+.bar-label{color:var(--tx2);text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bar-track{height:9px;background:#0a1striped;background:#0a1120;border-radius:99px;overflow:hidden;border:1px solid var(--line)}
+.bar-fill{height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--mint-d),var(--mint));transition:width 1.1s cubic-bezier(.22,1,.36,1)}
+.in .bar-fill{width:var(--w)}
+.bar-val{font-family:var(--mono);color:var(--mint);text-align:right}
+
+/* ---------- 应用卡片 ---------- */
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 24px}
+.filters button{
+  font-family:var(--sans);font-size:13.5px;color:var(--tx2);cursor:pointer;
+  background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:7px 15px;transition:.16s}
+.filters button:hover{color:var(--tx);border-color:var(--line2)}
+.filters button.on{background:linear-gradient(92deg,rgba(47,224,162,.2),rgba(77,195,255,.16));color:var(--mint);border-color:rgba(47,224,162,.5)}
+.filters button i{font-style:normal;color:var(--tx3);font-size:12px;margin-left:5px}
+.filters button.on i{color:var(--mint)}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap:18px}
+.card{
+  border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--panel);
+  display:flex;flex-direction:column;transition:transform .2s,border-color .2s,box-shadow .2s}
+.card:hover{transform:translateY(-3px);border-color:rgba(47,224,162,.45);box-shadow:0 16px 34px -20px rgba(47,224,162,.5)}
+.card.hide{display:none}
+.thumb{position:relative;display:block;aspect-ratio:16/9;overflow:hidden;background:#0b1220}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s}
+.card:hover .thumb img{transform:scale(1.045)}
+.noimg{display:grid;place-items:center;height:100%;font-size:34px;opacity:.35}
+.likes{position:absolute;right:9px;top:9px;font-family:var(--mono);font-size:12px;color:#04121a;
+  background:rgba(47,224,162,.94);border-radius:999px;padding:2px 9px;font-weight:700}
+.card .body{padding:14px 16px 16px;display:flex;flex-direction:column;gap:9px;flex:1}
+.cardhead{display:flex;align-items:baseline;gap:9px;justify-content:space-between}
+.card h3{font-size:16.5px;margin:0;line-height:1.35}
+.cat{font-size:11.5px;color:var(--tx3);border:1px solid var(--line2);border-radius:999px;padding:1px 9px;white-space:nowrap;flex:none}
+.desc{margin:0;font-size:13.8px;color:var(--tx2);line-height:1.7;flex:1}
+.tags{display:flex;flex-wrap:wrap;gap:5px}
+.tag{font-size:11.5px;color:#9fe8cd;background:rgba(47,224,162,.09);border:1px solid rgba(47,224,162,.22);
+  border-radius:6px;padding:1px 7px;font-family:var(--mono)}
+.auth{font-size:12.4px;color:var(--tx2);margin:-3px 0 0}
+.auth span{color:var(--tx3)}
+.src{font-size:12px;color:var(--tx3);font-family:var(--mono);word-break:break-all}
+.src:hover{color:var(--mint)}
+
+/* ---------- 精选 ---------- */
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(430px,1fr));gap:22px}
+.card.feat{border-color:var(--line2)}
+.card.feat .desc{font-size:14.4px}
+.card.feat h3{font-size:19px}
+.rank{position:absolute;left:10px;top:10px;font-family:var(--mono);font-size:12px;font-weight:700;
+  background:rgba(8,13,24,.85);border:1px solid var(--mint);color:var(--mint);border-radius:8px;padding:2px 9px}
+
+/* ---------- 代码 ---------- */
+pre{position:relative;background:#060b14;border:1px solid var(--line);border-radius:14px;
+  padding:16px 18px;overflow:auto;font-family:var(--mono);font-size:13px;line-height:1.65;margin:14px 0}
+pre code{font-family:inherit;color:#cfe3f5}
+.c-kw{color:#ff9d6b} .c-str{color:#8fe6b8} .c-com{color:#5c7096;font-style:italic} .c-fn{color:#7cc9ff} .c-num{color:#ffd479}
+.codewrap{position:relative}
+.copybtn{position:absolute;right:10px;top:10px;font-size:11.5px;font-family:var(--sans);cursor:pointer;
+  background:rgba(47,224,162,.1);color:var(--mint);border:1px solid rgba(47,224,162,.35);border-radius:7px;padding:3px 10px}
+.copybtn:hover{background:rgba(47,224,162,.2)}
+.tabs{display:flex;gap:6px;border-bottom:1px solid var(--line);margin-bottom:4px;flex-wrap:wrap}
+.tabs button{background:none;border:none;border-bottom:2px solid transparent;color:var(--tx2);cursor:pointer;
+  font-family:var(--sans);font-size:14px;padding:9px 14px}
+.tabs button.on{color:var(--mint);border-bottom-color:var(--mint)}
+.tabpane{display:none} .tabpane.on{display:block}
+
+/* ---------- 架构 ---------- */
+.flow{display:grid;gap:10px;margin:6px 0 4px}
+.flow .node{border:1px solid var(--line);border-radius:12px;padding:12px 16px;background:var(--panel);display:flex;gap:13px;align-items:baseline}
+.flow .node b{font-family:var(--mono);color:var(--mint);font-size:12.5px;flex:none;min-width:74px}
+.flow .node span{font-size:14px;color:var(--tx2)}
+.flow .arrow{text-align:center;color:var(--tx3);font-size:15px;line-height:1}
+.pill{display:inline-block;font-size:12px;font-family:var(--mono);color:var(--sky);
+  border:1px solid rgba(77,195,255,.3);background:rgba(77,195,255,.08);border-radius:6px;padding:1px 7px;margin:2px 4px 2px 0}
+
+/* ---------- 时间线 ---------- */
+.tl{position:relative;padding-left:30px;margin-top:12px}
+.tl:before{content:"";position:absolute;left:8px;top:6px;bottom:6px;width:2px;
+  background:linear-gradient(180deg,var(--mint),var(--sky),var(--violet),transparent)}
+.tl .item{position:relative;margin-bottom:22px}
+.tl .item:before{content:"";position:absolute;left:-27px;top:8px;width:11px;height:11px;border-radius:50%;
+  background:var(--bg);border:2px solid var(--mint)}
+.tl .item.k2:before{border-color:var(--sky)} .tl .item.k3:before{border-color:var(--violet)}
+.tl .when{font-family:var(--mono);font-size:12.5px;color:var(--mint);letter-spacing:.04em}
+.tl .what{font-size:15.5px;font-weight:650;margin:2px 0 3px}
+.tl .note{font-size:13.6px;color:var(--tx2)}
+
+/* ---------- 路径 ---------- */
+.paths{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
+.path{border:1px solid var(--line);border-radius:16px;padding:20px;background:var(--panel)}
+.path h3{margin:0 0 4px;font-size:17.5px}
+.path .who{font-size:12.5px;color:var(--coral);font-family:var(--mono);margin-bottom:12px}
+.path ol{margin:0;padding-left:20px;font-size:14px;color:var(--tx2)}
+.path li{margin-bottom:7px}
+.path li b{color:var(--tx)}
+
+/* ---------- FAQ ---------- */
+details{border:1px solid var(--line);border-radius:12px;background:var(--panel);margin-bottom:10px;overflow:hidden}
+details summary{cursor:pointer;padding:14px 18px;font-weight:600;font-size:15.3px;list-style:none;display:flex;gap:10px;align-items:center}
+details summary::-webkit-details-marker{display:none}
+details summary:before{content:"?";font-family:var(--mono);color:var(--mint);border:1px solid rgba(47,224,162,.4);
+  border-radius:6px;width:19px;height:19px;display:grid;place-items:center;font-size:12px;flex:none}
+details[open] summary{border-bottom:1px solid var(--line)}
+details .ans{padding:14px 18px;font-size:14.2px;color:var(--tx2)}
+details .ans code{font-family:var(--mono);font-size:12.5px;color:var(--mint);background:rgba(47,224,162,.08);border-radius:5px;padding:1px 6px}
+
+/* ---------- 表格滚动 ---------- */
+.tblwrap{overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:var(--panel)}
+.tblwrap table{margin:0;min-width:660px}
+.tblwrap th{background:rgba(47,224,162,.05);position:sticky;top:0}
+
+/* ---------- 灯箱 ---------- */
+#lb{position:fixed;inset:0;z-index:200;background:rgba(4,7,13,.94);display:none;place-items:center;padding:26px;cursor:zoom-out}
+#lb.on{display:grid}
+#lb img{max-width:min(96vw,1500px);max-height:88vh;border-radius:12px;border:1px solid var(--line2)}
+#lb .x{position:absolute;right:20px;top:16px;color:var(--tx2);font-size:26px;font-family:var(--mono)}
+
+/* ---------- 页脚 ---------- */
+footer{border-top:1px solid var(--line);margin-top:40px;padding:32px 0 54px;color:var(--tx3);font-size:13.4px}
+footer a{color:var(--tx2)}
+footer .links{display:flex;flex-wrap:wrap;gap:8px 18px;margin:12px 0}
+.notice{border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:12px;background:var(--panel);
+  padding:15px 18px;font-size:14px;color:var(--tx2);margin:18px 0}
+.notice b{color:var(--gold)}
+
+.js .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s,transform .6s}
+.js .reveal.in{opacity:1;transform:none}
+
+@media (max-width:900px){
+  .hero-grid,.two,.feat-grid{grid-template-columns:1fr}
+  .hero{padding:48px 0 36px}
+  section{padding:44px 0}
+  .bar-row{grid-template-columns:96px 1fr 40px}
+  nav.top-nav{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  .js .reveal{opacity:1;transform:none} html{scroll-behavior:auto}
+  .bar-fill{transition:none} .card:hover{transform:none}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="inner">
+    <div class="brand">
+      <svg viewBox="0 0 48 48" fill="none" aria-hidden="true">
+        <path d="M11 8 L13 15" stroke="#2fe0a2" stroke-width="2" stroke-linecap="round"/>
+        <path d="M37 8 L35 15" stroke="#2fe0a2" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="11" cy="7" r="2.4" fill="#ff7a4d"/><circle cx="37" cy="7" r="2.4" fill="#ff7a4d"/>
+        <rect x="10" y="15" width="28" height="15" rx="6" fill="#e8eef8"/>
+        <circle cx="19" cy="22.5" r="4" fill="#0d1526"/><circle cx="29" cy="22.5" r="4" fill="#0d1526"/>
+        <path d="M23 22.5 H25" stroke="#0d1526" stroke-width="2"/>
+        <path d="M14 31 L20 35 M34 31 L28 35" stroke="#8fa4c2" stroke-width="2"/>
+        <path d="M13 40 q11 -8 22 0 v3 q-11 -7 -22 0 z" fill="#dbe4f2"/>
+      </svg>
+      <span>REACHY MINI 图鉴</span>
+    </div>
+    <nav class="top-nav"><a href="#spec">认识它</a><a href="#apps">应用图鉴</a><a href="#featured">深度拆解</a><a href="#repos">代码项目</a><a href="#build">动手开发</a><a href="#stack">平台机制</a><a href="#path">学习路径</a><a href="#china">中国区实战</a><a href="#press">媒体评价</a><a href="#observe">生态观察</a><a href="#timeline">时间线</a><a href="#faq">FAQ</a></nav>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="grid-bg"></div>
+  <div class="wrap hero-grid">
+    <div>
+      <span class="kicker">● 社区生态研究 · 2026-09-18</span>
+      <h1>刚装好的 <em>Reachy&nbsp;Mini</em><br>到底能玩出什么花样？</h1>
+      <p class="lede">它只有 <b>9 个自由度</b>、一个能转的脑袋、两根会抖的天线和一颗 120° 的摄像头——
+      但社区的开发者已经用它做出了 <b>367 个赞的“手机戒断教练”</b>、<b>会解说 F1 的赛事主播</b>、
+      <b>全本地推理的婴儿看护</b>，甚至让 AI 代理长出了身体。
+      这份图鉴把 Hugging Face Spaces 上 <b>74 个精选应用</b>、14 个代码项目、
+      官方硬件规格与开发套路，整理成一条从“开箱”到“造物”的路。</p>
+      <div class="hero-stats">
+        <div class="stat"><b>74</b><small>精选应用</small></div>
+        <div class="stat"><b>9</b><small>自由度</small></div>
+        <div class="stat"><b>1975</b><small>累计点赞</small></div>
+        <div class="stat"><b>407</b><small>社区动作库</small></div>
+        <div class="stat"><b>1.35<small>kg</small></b><small>整机重量</small></div>
+        <div class="stat"><b>547</b><small>打标社区 Space</small></div>
+      </div>
+      <p class="quote">“Reachy Mini 是一个为黑客和 AI 建造者打造的开源表达型机器人。”—— 官方 SDK 仓库</p>
+    </div>
+    <div class="hero-art">
+      <img src="img/hero_hello.gif" alt="Reachy Mini 打招呼动画">
+      <div class="cap">官方仓库首页的打招呼动画：天线先抖、脑袋再抬、身体跟着晃——这 9 个自由度就是全部表演空间。</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ================= 认识它 ================= -->
+<section id="spec">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="num">01 / SPEC</div>
+      <h2>先摸清你家这台小机器人的身体</h2>
+      <p>读懂硬件边界，才知道哪些社区应用为什么那样设计。下面所有数字都来自官方数据手册（docs/source/platforms/*/hardware.md）。</p>
+    </div>
+
+    <div class="dof reveal">
+      <div class="d"><b>6</b><span>头部自由度</span><em>3 转动 + 3 平移（Stewart 平台）</em></div>
+      <div class="d c2"><b>1</b><span>身体自由度</span><em>底座偏航 ±155°</em></div>
+      <div class="d c3"><b>2</b><span>天线自由度</span><em>左右各 ±180°</em></div>
+    </div>
+
+    <div class="two reveal" style="margin-top:22px">
+      <figure>
+        <img src="img/dimensions.jpg" alt="Reachy Mini 尺寸图" data-zoom="1">
+        <figcaption><b>尺寸</b>：展开 30 × 20 × 15.5 cm，天线再往上 14 cm。睡觉姿势（最左）能把整机压到 15.5 cm 宽——这也是它“桌面级”的关键。</figcaption>
+      </figure>
+      <div class="spec-grid">
+        <div class="spec"><div class="k">整机重量</div><div class="v">1.475 <small>kg（无线版）</small></div><div class="n">Lite 版 1.350 kg</div></div>
+        <div class="spec"><div class="k">摄像头</div><div class="v">12 <small>MP</small></div><div class="n">Raspberry Pi Camera v3 Wide，Sony IMX708，120° 广角，自动对焦</div></div>
+        <div class="spec"><div class="k">麦克风阵列</div><div class="v">4 <small>× PDM MEMS</small></div><div class="n">基于 Seeed reSpeaker XMOS XVF3800，16 kHz，64 dBA 信噪比</div></div>
+        <div class="spec"><div class="k">扬声器</div><div class="v">5 <small>W @ 4Ω</small></div><div class="n">可直接做语音对话与音乐播放</div></div>
+        <div class="spec"><div class="k">电机</div><div class="v">9 <small>× Dynamixel</small></div><div class="n">底座 1× XC330-M288-PG，天线 2× XL330-M077-T，平台 6× XL330-M288-T</div></div>
+        <div class="spec"><div class="k">主板（无线版）</div><div class="v">CM4 <small>4GB / 16GB</small></div><div class="n">Raspberry Pi CM4104016 + 2.4–5 GHz 双频天线（2.79 dBi）</div></div>
+        <div class="spec"><div class="k">IMU（仅无线版）</div><div class="v">BMI088</div><div class="n">加速度计 + 陀螺仪，可读四元数与温度；Lite 版没有 IMU</div></div>
+        <div class="spec"><div class="k">电机通信</div><div class="v">1 <small>Mbps</small></div><div class="n">Dynamixel TTL 总线；底座 ID 10，平台 ID 11–16，天线 ID 17–18</div></div>
+        <div class="spec"><div class="k">电池（无线版）</div><div class="v">12.8 <small>Wh</small></div><div class="n">LiFePO4 2000 mAh / 6.4 V，带过充过放过流与温控保护</div></div>
+        <div class="spec"><div class="k">材质</div><div class="v">ABS / PC <small>+ 铝 + 钢</small></div><div class="n">3D 打印皮肤可替换（社区已有皮肤库）</div></div>
+        <div class="spec"><div class="k">供电</div><div class="v">6.8–7.6 <small>V</small></div><div class="n">随附 7V/5A 电源；无线版靠 12.8 Wh 电池，电量只能看指示灯（绿→橙→红），软件读不到</div></div>
+      </div>
+    </div>
+
+    <div class="two reveal" style="margin-top:22px">
+      <figure>
+        <img src="img/dof_table.jpg" alt="Reachy Mini 各轴行程表" data-zoom="1">
+        <figcaption><b>每个轴能走多远</b>：头部平移只有几厘米、转动 ±40°~60°，底座却能达到 ±155°。这就是为什么大多数应用都用“头部微动作 + 底座转向说话人”的组合。软件层还会做额外夹取（例如头身偏航差不超过 65°），超范围的目标值会被自动收敛到安全区内。</figcaption>
+      </figure>
+      <figure>
+        <img src="img/motors.jpg" alt="Reachy Mini 电机布局" data-zoom="1">
+        <figcaption><b>9 个电机的位置</b>：脑袋不是用舵机堆出来的，而是 6 个电机撑起的 Stewart 并联平台——这让头部可以做真正的平移，而不只是原地转。</figcaption>
+      </figure>
+    </div>
+
+    <div class="reveal" style="margin-top:22px">
+      <h3 style="font-size:19px;margin-bottom:6px">无线版 vs Lite 版：怎么选</h3>
+      <div class="tblwrap">
+        <table>
+          <thead><tr><th>对比项</th><th>Reachy Mini（Wireless）</th><th>Reachy Mini Lite</th></tr></thead>
+          <tbody>
+            <tr><td>算力位置</td><td class="mono">机载 CM4，自主运行</td><td class="mono">USB-C 连电脑，用电脑算</td></tr>
+            <tr><td>电池</td><td>有（12.8 Wh LiFePO4）</td><td>无，需插墙供电</td></tr>
+            <tr><td>IMU</td><td>有</td><td>无</td></tr>
+            <tr><td>自由度 / 摄像头 / 麦克风</td><td colspan="2">完全一致（9 DOF、12MP 广角、4 麦阵列 + 5W 喇叭）</td></tr>
+            <tr><td>应用运行方式</td><td>daemon 在机器人上，应用跑在 <code>/venvs/apps_venv/</code></td><td>daemon 在电脑上，应用跑在电脑上</td></tr>
+            <tr><td>适合谁</td><td>想让它独立站在桌上、做展台/陪伴</td><td>想快速迭代代码、接 Jetson/PC 跑大模型</td></tr>
+            <tr><td>组装时间</td><td colspan="2">官方口径 2–3 小时（有逐步图文装配指南 Space）</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="spec-grid" style="margin-top:18px">
+        <div class="spec"><div class="k">当前价格 · Lite</div><div class="v">$399</div><div class="n">2025 年 7 月首发时是 $299，2026 年 7 月 3 日调价至 $399</div></div>
+        <div class="spec"><div class="k">当前价格 · Wireless</div><div class="v">$499</div><div class="n">首发价 $449；欧洲区约 €350 / €435（不含税运）</div></div>
+        <div class="spec"><div class="k">发货</div><div class="v">&le; 90 <small>天</small></div><div class="n">订单为 DAP 条款；第三方渠道（Seeed / AliExpress）价格通常更高</div></div>
+        <div class="spec"><div class="k">组装时间</div><div class="v">1.5–4 <small>小时</small></div><div class="n">官方文档写 2–3 小时，FAQ 里多数测试者 1.5–2 小时；免焊接，工具随箱</div></div>
+      </div>
+      <div class="notice"><b>一句话建议：</b>要“机器人感”选无线版；要“算力自由”（跑 Whisper、VLM、Jetson 本地推理）选 Lite 版 + 一台电脑/边缘盒子。社区里最硬核的全本地项目（如 Baby 陪伴机器人）几乎都是 Lite/无线 + Jetson 的组合。
+      <br><b>公开数据缺口：</b>官方从未公布续航小时数与销量数字，网上流传的“续航 X 小时”都不可信，本文因此只给电池容量（12.8 Wh）。</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ================= 应用图鉴 ================= -->
+<section id="apps">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="num">02 / APP ATLAS</div>
+      <h2>社区应用图鉴：74 个可以直接装的应用</h2>
+      <p>Reachy Mini 的“应用商店”就架在 Hugging Face Spaces 上，机器人的控制面板里点 <b>Install</b> 就能装。
+      下面这些是社区里最值得先试的一批，按用途分了 7 类——点分类可以筛。</p>
+    </div>
+
+    <div class="two reveal" style="margin-bottom:26px">
+      <figure>
+        <img src="img/dashboard.jpg" alt="Reachy Mini 控制面板与 Hugging Face 应用商店" data-zoom="1">
+        <figcaption><b>这就是你机器人的“应用商店”</b>：左侧是实时状态与动作播放器，下方 “Install from 🤗 Hugging Face” 里每个应用都有一个 Install 按钮，一键装到机器人上。</figcaption>
+      </figure>
+      <div class="chart" id="chart">
+        <div style="font-size:13.5px;color:var(--tx3);letter-spacing:.05em;text-transform:uppercase;margin-bottom:12px">社区应用点赞 Top 10</div>
+        <div class="bar-row">
+  <span class="bar-label">Microduck 强化学习游乐场</span>
+  <div class="bar-track"><div class="bar-fill" style="--w:100.0%"></div></div>
+  <span class="bar-val">549</span>
+</div><div class="bar-row">
+  <span class="bar-label">Reachy Phone Home · 手机戒断</span>
+  <div class="bar-track"><div class="bar-fill" style="--w:66.8%"></div></div>
+  <span class="bar-val">367</span>
+</div><div class="bar-row">
+  <span class="bar-label">F1 赛事解说员</span>
+  <div class="bar-track"><div class="bar-fill" style="--w:37.7%"></div></div>
+  <span class="bar-val">207</span>
+</div><div class="bar-row">
+  <span class="bar-label">Baby 陪伴机器人（全本地）</span>
+  <div class="bar-track"><div class="bar-fill" style="--w:32.6%"></div></div>
+  <span class="bar-val">179</span>
+</div><div class="bar-row">
+  <span class="bar-label">官方对话应用</span>
+  <div class="bar-track"><div class="bar-fill" style="--w:31.7%"></div></div>
+  <span class="bar-val">174</span>
+</div><div class="bar-row">
+  <span class="bar-label">官方临场遥操作终端</span>
+  <div class="bar-track"><div class="bar-fill" style="--w:7.7%"></div></div>
+  <span class="bar-val">42</span>
+</div><div class="bar-row">
+  <span class="bar-label">3D 网页可视化</span>
+  <div class="bar-track"><div class="bar-fill" style="--w:5.6%"></div></div>
+  <span class="bar-val">31</span>
+</div><div class="bar-row">
+  <span class="bar-label">官方情绪库播放器</span>
+  <div class="bar-track"><div class="bar-fill" style="--w:4.7%"></div></div>
+  <span class="bar-val">26</span>
+</div><div class="bar-row">
+  <span class="bar-label">Home Assistant 深度集成</span>
+  <div class="bar-track"><div class="bar-fill" style="--w:4.6%"></div></div>
+  <span class="bar-val">25</span>
+</div><div class="bar-row">
+  <span class="bar-label">牵线木偶 · 手动录动作</span>
+  <div class="bar-track"><div class="bar-fill" style="--w:4.4%"></div></div>
+  <span class="bar-val">24</span>
+</div>
+        <div style="font-size:12.5px;color:var(--tx3);margin-top:12px">数据来源：Hugging Face Spaces API（抓取于 2026-09-18）。点赞是社区热度的近似指标，不完全等于质量。</div>
+      </div>
+    </div>
+
+    <div class="filters" id="filters">
+      <button data-f="all" class=on>🗂️ 全部<i>74</i></button><button data-f="talk">🗣️ 对话陪伴<i>10</i></button><button data-f="vision">👁️ 视觉专注<i>8</i></button><button data-f="edu">🎓 教育游戏<i>9</i></button><button data-f="music">🎵 音乐节奏<i>6</i></button><button data-f="tool">🎛️ 工具遥操作<i>15</i></button><button data-f="life">☕ 生活助手<i>12</i></button><button data-f="dev">🧪 开发平台<i>14</i></button>
+    </div>
+
+    <div class="sec-head" style="margin:30px 0 14px">
+      <h3 style="font-size:20px;margin:0">🔥 五大精选 + 社区冠军</h3>
+      <p style="font-size:14px">这六个项目代表了目前社区的天花板：从纯端侧 AI 到全本地 7 模型流水线。其中好几个出自芯片厂商员工或官方团队之手——往下翻还有官方的情绪库播放器、牵线木偶（手动示教录动作）等旗舰应用。</p>
+    </div>
+    <div class="feat-grid" id="featgrid">
+      <article class="card feat" data-cat="vision" data-likes="367">
+  <a class="thumb" href="https://huggingface.co/spaces/itsMarco-G/reachy_phone_home" target="_blank" rel="noopener"><img src="img/app_itsMarco-G__reachy_phone_home.jpg" alt="Reachy Phone Home · 手机戒断" loading="lazy" data-zoom="1"><span class="likes">♥ 367</span></a>
+  <div class="body">
+    <div class="cardhead"><h3>Reachy Phone Home · 手机戒断</h3><span class="cat">视觉专注</span></div>
+    <div class="auth">✍️ Marco Domingo <span>· Arm</span></div>
+    <p class="desc">社区点赞第一的应用。用机器人摄像头 + YOLO 持续检测“手机”与“人”：你一旦摸手机，Reachy 就会盯着你、做小动作、播放俏皮语音提醒。配了桌面与手机都能开的浏览器控制台，可调置信度、心跳间隔，还能开调试视频流。</p>
+    <div class="tags"><span class="tag">YOLO26</span><span class="tag">COCO class 67</span><span class="tag">look-at 内参换算</span><span class="tag">FastAPI :8088</span><span class="tag">Apache-2.0 主体 + AGPL 依赖</span></div>
+    <a class="src" href="https://huggingface.co/spaces/itsMarco-G/reachy_phone_home" target="_blank" rel="noopener">itsMarco-G/reachy_phone_home ↗</a>
+  </div>
+</article><article class="card feat" data-cat="vision" data-likes="207">
+  <a class="thumb" href="https://huggingface.co/spaces/d10g/f1commentator" target="_blank" rel="noopener"><img src="img/app_d10g__f1commentator.jpg" alt="F1 赛事解说员" loading="lazy" data-zoom="1"><span class="likes">♥ 207</span></a>
+  <div class="body">
+    <div class="cardhead"><h3>F1 赛事解说员</h3><span class="cat">视觉专注</span></div>
+    <div class="auth">✍️ Dave Starling</div>
+    <p class="desc">两百多个点赞的“会看比赛的机器人”：从 OpenF1 历史赛事 API 回放真实赛况数据，用 210 套模板生成技术流/策略流/戏剧流三种风格的解说词，ElevenLabs 合成语音，同时让头部动作与解说节奏同步。支持 1×–20× 倍速回放。</p>
+    <div class="tags"><span class="tag">OpenF1 API</span><span class="tag">210 套模板 + 规则引擎（不用 LLM）</span><span class="tag">ElevenLabs 流式 TTS</span><span class="tag">仅用颈部 6 自由度</span></div>
+    <a class="src" href="https://huggingface.co/spaces/d10g/f1commentator" target="_blank" rel="noopener">d10g/f1commentator ↗</a>
+  </div>
+</article><article class="card feat" data-cat="vision" data-likes="179">
+  <a class="thumb" href="https://huggingface.co/spaces/ravediamond/baby-reachy-mini-companion" target="_blank" rel="noopener"><img src="img/app_ravediamond__baby-reachy-mini-companion.jpg" alt="Baby 陪伴机器人（全本地）" loading="lazy" data-zoom="1"><span class="likes">♥ 179</span></a>
+  <div class="body">
+    <div class="cardhead"><h3>Baby 陪伴机器人（全本地）</h3><span class="cat">视觉专注</span></div>
+    <div class="auth">✍️ ravindu somawansa <span>· 个人项目 · Pro 用户</span></div>
+    <p class="desc">最有野心的社区项目：7 个模型全部跑在本地（Mac + 约 700 美元的 Jetson Orin NX），零云端、零订阅。婴儿哭 → YAMNet 识别哭声 → VLM 推理决策 → 安抚动作 → 给家长发一张 Signal 照片。还能讲故事、认字、检测危险、跟踪人脸。</p>
+    <div class="tags"><span class="tag">Silero VAD</span><span class="tag">Faster-Whisper</span><span class="tag">Kokoro</span><span class="tag">YAMNet</span><span class="tag">YOLOv26n</span><span class="tag">Ministral/Qwen 3B 推理</span><span class="tag">Qwen3-VL 4B 视觉</span><span class="tag">Jetson Orin NX</span></div>
+    <a class="src" href="https://huggingface.co/spaces/ravediamond/baby-reachy-mini-companion" target="_blank" rel="noopener">ravediamond/baby-reachy-mini-companion ↗</a>
+  </div>
+</article><article class="card feat" data-cat="talk" data-likes="174">
+  <a class="thumb" href="https://huggingface.co/spaces/pollen-robotics/reachy_mini_conversation_app" target="_blank" rel="noopener"><img src="img/app_pollen-robotics__reachy_mini_conversation_app.jpg" alt="官方对话应用" loading="lazy" data-zoom="1"><span class="likes">♥ 174</span></a>
+  <div class="body">
+    <div class="cardhead"><h3>官方对话应用</h3><span class="cat">对话陪伴</span></div>
+    <div class="auth">✍️ Pollen Robotics <span>· 官方</span></div>
+    <p class="desc">官方旗舰应用：实时语音对话 + 视觉 + 性格化工具调用 + 编排动作。内置“动作融合”系统，会把说话时的呼吸、点头、天线抖动叠加到正在播放的舞蹈上，让机器人一边讲话一边自然摆动。</p>
+    <div class="tags"><span class="tag">HF Realtime 后端</span><span class="tag">OpenAI Realtime / 本地端点</span><span class="tag">视觉工具</span><span class="tag">动作融合</span></div>
+    <a class="src" href="https://huggingface.co/spaces/pollen-robotics/reachy_mini_conversation_app" target="_blank" rel="noopener">pollen-robotics/reachy_mini_conversation_app ↗</a>
+  </div>
+</article><article class="card feat" data-cat="tool" data-likes="42">
+  <a class="thumb" href="https://huggingface.co/spaces/pollen-robotics/telepresence" target="_blank" rel="noopener"><img src="img/app_pollen-robotics__telepresence.jpg" alt="官方临场遥操作终端" loading="lazy" data-zoom="1"><span class="likes">♥ 42</span></a>
+  <div class="body">
+    <div class="cardhead"><h3>官方临场遥操作终端</h3><span class="cat">工具遥操作</span></div>
+    <div class="auth">✍️ Pollen Robotics <span>· 官方</span></div>
+    <p class="desc">移动端优先的遥操作应用：机器人摄像头 4:3 全幅画面、双向音频（你的麦克风从机器人喇叭出来，机器人麦克风回传给你），屏幕虚拟摇杆控制头部俯仰/偏航，头部到机械限位后底座接续旋转。链路里没有任何 AI，纯人对机器人。</p>
+    <div class="tags"><span class="tag">React 19 + MUI 7</span><span class="tag">replaceTrack 接管麦克风</span><span class="tag">虚拟摇杆</span><span class="tag">无 AI 直连</span></div>
+    <a class="src" href="https://huggingface.co/spaces/pollen-robotics/telepresence" target="_blank" rel="noopener">pollen-robotics/telepresence ↗</a>
+  </div>
+</article><article class="card feat" data-cat="vision" data-likes="14">
+  <a class="thumb" href="https://huggingface.co/spaces/8bitkick/reachy_mini_reactions" target="_blank" rel="noopener"><img src="img/app_8bitkick__reachy_mini_reactions.jpg" alt="端侧极速反应（纯树莓派）" loading="lazy" data-zoom="1"><span class="likes">♥ 14</span></a>
+  <div class="body">
+    <div class="cardhead"><h3>端侧极速反应（纯树莓派）</h3><span class="cat">视觉专注</span></div>
+    <div class="auth">✍️ Dominic Pajak <span>· Arm</span></div>
+    <p class="desc">一个假期家庭项目的成果：全部推理跑在树莓派 CPU 上，不外传。听到说话 → 快速转向说话人 → 用句向量做语义检索匹配意图 → 立刻用语音/动作回应。非语言反应延迟低于 100ms。</p>
+    <div class="tags"><span class="tag">Silero VAD</span><span class="tag">Moonshine STT</span><span class="tag">all-MiniLM-L6-v2 GGUF</span><span class="tag">Supertonic TTS</span><span class="tag">树莓派 5 · 约 2GB 内存</span><span class="tag">转头 &lt;100ms，整回路 1–3s</span></div>
+    <a class="src" href="https://huggingface.co/spaces/8bitkick/reachy_mini_reactions" target="_blank" rel="noopener">8bitkick/reachy_mini_reactions ↗</a>
+  </div>
+</article>
+    </div>
+
+    <div class="sec-head" style="margin:44px 0 14px">
+      <h3 style="font-size:20px;margin:0">全部应用（按点赞排序）</h3>
+    </div>
+    <div class="cards" id="cards">
+      <article class="card" data-cat="dev" data-likes="549">
+  <a class="thumb" href="https://huggingface.co/spaces/pollen-robotics/microduck-simulator" target="_blank" rel="noopener"><img src="img/app_pollen-robotics__microduck-simulator.jpg" alt="Microduck 强化学习游乐场" loading="lazy" data-zoom="1"><span class="likes">♥ 549</span></a>
+  <div class="body">
+    <div class="cardhead"><h3>Microduck 强化学习游乐场</h3><span class="cat">开发平台</span></div>
+    <div class="auth">✍️ Pollen Robotics <span>· 官方</span></div>
+    <p class="desc">（严格说这是 Pollen 的另一台机器人 Microduck，不是 Reachy Mini——但它和 Reachy 同属一个生态，社区项目会把两者放进同一个 MuJoCo 世界。）官方把真正的强化学习策略搬进浏览器：MuJoCo 编译成 WebAssembly 做物理步进，onnxruntime-web 以 50Hz 跑策略网络，没有服务器、没有后端。内置两种运动形态（腿式行走 / 轮式滑行），按 M 键切换。是理解“仿真到现实”的最好入口。</p>
+    <div class="tags"><span class="tag">MuJoCo WASM</span><span class="tag">onnxruntime-web 50Hz</span><span class="tag">真实 RL 策略</span><span class="tag">纯前端</span></div>
+    <a class="src" href="https://huggingface.co/spaces/pollen-robotics/microduck-simulator" target="_blank" rel="noopener">pollen-robotics/microduck-simulator ↗</a>
+  </div>
+</article><article class="card" data-cat="tool" data-likes="31">
+  <a class="thumb" href="https://huggingface.co/spaces/8bitkick/reachy_mini_3d_web_viz" target="_blank" rel="noopener"><img src="img/app_8bitkick__reachy_mini_3d_web_viz.jpg" alt="3D 网页可视化" loading="lazy" data-zoom="1"><span class="likes">♥ 31</span></a>
+  <div class="body">
+    <div class="cardhead"><h3>3D 网页可视化</h3><span class="cat">工具遥操作</span></div>
+    <div class="auth">✍️ Dominic Pajak <span>· Arm</span></div>
+    <p class="desc">在浏览器里实时看到 Reachy 的当前姿态：接通机器人后，一个 3D 模型以与实体一致的角度同步运动，用来调试动作、录 Demo 或做直播画面。</p>
+    <div class="tags"><span class="tag">three.js + URDF</span><span class="tag">WebSocket 实时关节位置</span><span class="tag">可复用的 URDF→Web 管线</span></div>
+    <a class="src" href="https://huggingface.co/spaces/8bitkick/reachy_mini_3d_web_viz" target="_blank" rel="noopener">8bitkick/reachy_mini_3d_web_viz ↗</a>
+  </div>
+</article><article class="card" data-cat="tool" data-likes="26">
+  <a class="thumb" href="https://huggingface.co/spaces/pollen-robotics/emotions" target="_blank" rel="noopener"><img src="img/app_pollen-robotics__emotions.jpg" alt="官方情绪库播放器" loading="lazy" data-zoom="1"><span class="likes">♥ 26</span></a>
+  <div class="body">
+    <div class="cardhead"><h3>官方情绪库播放器</h3><span class="cat">工具遥操作</span></div>
+    <div class="auth">✍️ Pollen Robotics <span>· 官方</span></div>
+    <p class="desc">把官方情绪库做成一个“普鲁契克情绪轮”：8 个颜色扇区（喜悦、信任、恐惧、惊讶、悲伤、厌恶、愤怒、期待）各分 3 档强度，点扇区出动作列表，点卡片就把轨迹以 50–100Hz 推到机器人上实时播放；中间的骰子随机抽一个情绪。浏览器端用 Web Audio 同步播放配套音效，链路里没有任何 AI——纯数据集回放。</p>
+    <div class="tags"><span class="tag">普鲁契克情绪轮</span><span class="tag">50–100Hz set_full_target</span><span class="tag">WebRTC 数据通道</span><span class="tag">无 AI 纯回放</span></div>
+    <a class="src" href="https://huggingface.co/spaces/pollen-robotics/emotions" target="_blank" rel="noopener">pollen-robotics/emotions ↗</a>
+  </div>
+</article><article class="card" data-cat="vision" data-likes="25">
+  <a class="thumb" href="https://huggingface.co/spaces/djhui5710/reachy_mini_home_assistant" target="_blank" rel="noopener"><img src="img/app_djhui5710__reachy_mini_home_assistant.jpg" alt="Home Assistant 深度集成" loading="lazy" data-zoom="1"><span class="likes">♥ 25</span></a>
+  <div class="body">
+    <div class="cardhead"><h3>Home Assistant 深度集成</h3><span class="cat">视觉专注</span></div>
+    <div class="auth">✍️ Desmond Dong</div>
+    <p class="desc">把 Reachy Mini 变成智能家居的“身体”：通过 Home Assistant 的 Assist 语音管线接入全屋设备，机器人可播报状态、响应语音指令、用动作表达设备事件，并提供 HA 蓝图与边车服务。</p>
+    <div class="tags"><span class="tag">ESPHome 协议 :6053</span><span class="tag">microWakeWord 唤醒词</span><span class="tag">35 种情绪</span><span class="tag">Sendspin 多房间音频</span><span class="tag">中英双语手册</span></div>
+    <a class="src" href="https://huggingface.co/spaces/djhui5710/reachy_mini_home_assistant" target="_blank" rel="noopener">djhui5710/reachy_mini_home_assistant ↗</a>
+  </div>
+</article><article class="card" data-cat="tool" data-likes="24">
+  <a class="thumb" href="https://huggingface.co/spaces/pollen-robotics/marionette" target="_blank" rel="noopener"><img src="img/app_pollen-robotics__marionette.jpg" alt="牵线木偶 · 手动录动作" loading="lazy" data-zoom="1"><span class="likes">♥ 24</span></a>
+  <div class="body">
+    <div class="cardhead"><h3>牵线木偶 · 手动录动作</h3><span class="cat">工具遥操作</span></div>
+    <div class="auth">✍️ Pollen Robotics <span>· 官方</span></div>
+    <p class="desc">官方录动作工具：把电机放松，用手直接“牵着”Reachy 摆姿势，它会把动作连同音频录下来，存成情绪库同款 schema（JSON + WAV），可以直接上传到 Hugging Face 变成社区动作。新用户建议用浏览器版 Marionette (JS)，手机也能开、免安装。</p>
+    <div class="tags"><span class="tag">电机放松手动示教</span><span class="tag">录制 + 回放</span><span class="tag">JSON + WAV schema</span><span class="tag">可上传成社区动作</span></div>
+    <a class="src" href="https://huggingface.co/spaces/pollen-robotics/marionette" target="_blank" rel="noopener">pollen-robotics/marionette ↗</a>
+  </div>
+</article><article class="card" data-cat="vision" data-likes="20">
+  <a class="thumb" href="https://huggingface.co/spaces/pollen-robotics/hand_tracker_v2" target="_blank" rel="noopener"><img src="img/app_pollen-robotics__hand_tracker_v2.jpg" alt="手部跟踪（官方）" loading="lazy" data-zoom="1"><span class="likes">♥ 20</span></a>
+  <div class="body">
+    <div class="cardhead"><h3>手部跟踪（官方）</h3><span class="cat">视觉专注</span></div>
+    <div class="auth">✍️ Pollen Robotics <span>· 官方</span></div>
+    <p class="desc">官方手部跟踪应用：摄像头看到你的手，机器人实时跟着你的手移动，是展示“9 自由度值回票价”的最佳 Demo，也是理解实时控制环的推荐入门样例。</p>
+    <div class="tags"><span class="tag">官方示例</span><span class="tag">实时手部跟踪</span><span class="tag">控制环</span></div>
+    <a class="src" href="https://huggingface.co/spaces/pollen-robotics/hand_tracker_v2" target="_blank" rel="noopener">pollen-robotics/hand_tracker_v2 ↗</a>
+  </div>
+</article><article class="card" data-cat="tool" data-likes="18">
+  <a class="thumb" href="https://huggingface.co/spaces/pollen-robotics/reachy_mini_testbench" target="_blank" rel="noopener"><img src="img/app_pollen-robotics__reachy_mini_testbench.jpg" alt="官方调试与 CI 测试台" loading="lazy" data-zoom="1"><span class="likes">♥ 18</span></a>
+  <div class="body">
+    <div class="cardhead"><h3>官方调试与 CI 测试台</h3><span class="cat">工具遥操作</span></div>
+    
+    <p class="desc">官方出品的调试利器：自动检测 daemon 是否在跑，在线模式下可看 CPU/内存/磁盘/控制环频率、IP、实时头部位姿与全部 9 个电机位置，用滑杆手动调 roll/pitch/yaw 与天线，还能一键归零、唤醒、休眠。</p>
+    <div class="tags"><span class="tag">9 电机状态</span><span class="tag">控制环频率</span><span class="tag">滑杆调试</span><span class="tag">CI 验证</span></div>
+    <a class="src" href="https://huggingface.co/spaces/pollen-robotics/reachy_mini_testbench" target="_blank" rel="noopener">pollen-robotics/reachy_mini_testbench ↗</a>
+  </div>
+</article><article class="card" data-cat="edu" data-likes="16">
+  <a class="thumb" href="https://huggingface.co/spaces/pollen-robotics/red_light_green_light" target="_blank" rel="noopener"><img src="img/app_pollen-robotics__red_light_green_light.jpg" alt="一二三木头人" loading="lazy" data-zoom="1"><span class="likes">♥ 16</span></a>
+  <div class="body">
+    <div class="cardhead"><h3>一二三木头人</h3><span class="cat">教育游戏</span></div>
+    
+    <p class="desc">官方小游戏：经典的“红灯绿灯”搬进现实——绿灯时你可以动、红灯时必须定住，机器人负责当那个转头抓你的人。</p>
+    <div class="tags"><span class="tag">官方示例</span><span class="tag">反应游戏</span></div>
+    <a class="src" href="https://huggingface.co/spaces/pollen-robotics/red_light_green_light" target="_blank" rel="noopener">pollen-robotics/red_light_green_light ↗</a>
+  </div>
+</article><article class="card" data-cat="music" data-likes="12">
+  <a class="thumb" href="https://huggingface.co/spaces/Boopster/reachy_mini_metronome" target="_blank" rel="noopener"><img src="img/app_Boopster__reachy_mini_metronome.jpg" alt="节拍器（天线当摆锤）" loading="lazy" data-zoom="1"><span class="likes">♥ 12</span></a>
+  <div class="body">
+    <div class="cardhead"><h3>节拍器（天线当摆锤）</h3><span class="cat">音乐节奏</span></div>
+    
+    <p class="desc">把两根天线变成真正的节拍摆锤：左右反向摆动，配合合成点击音，重拍音高更高。BPM 40–208，支持 2/4、3/4、4/4、5/4、6/8 拍号。</p>
+    <div class="tags"><span class="tag">音频合成</span><span class="tag">镜像天线运动</span><span class="tag">拍号支持</span></div>
+    <a class="src" href="https://huggingface.co/spaces/Boopster/reachy_mini_metronome" target="_blank" rel="noopener">Boopster/reachy_mini_metronome ↗</a>
+  </div>
+</article><article class="card" data-cat="dev" data-likes="12">
+  <a class="thumb" href="https://huggingface.co/spaces/pollen-robotics/reachy-mini-skins" target="_blank" rel="noopener"><img src="img/app_pollen-robotics__reachy-mini-skins.jpg" alt="外壳皮肤合集" loading="lazy" data-zoom="1"><span class="likes">♥ 12</span></a>
+  <div class="body">
+    <div class="cardhead"><h3>外壳皮肤合集</h3><span class="cat">开发平台</span></div>
+    
+    <p class="desc">社区 3D 打印皮肤库：可下载各种外观套件，把白色的 Reachy 换成你喜欢的造型，包含打印与装配说明。</p>
+    <div class="tags"><span class="tag">3D 打印</span><span class="tag">外观改造</span></div>
+    <a class="src" href="https://huggingface.co/spaces/pollen-robotics/reachy-mini-skins" target="_blank" rel="noopener">pollen-robotics/reachy-mini-skins ↗</a>
+  </div>
+</article><article class="card" data-cat="tool" data-likes="11">
+  <a class="thumb" href="https://huggingface.co/spaces/HuggingFaceM4/reachy_mini_remote_control" target="_blank" rel="noopener"><img src="img/app_HuggingFaceM4__reachy_mini_remote_control.jpg" alt="多人远程控制服务" loading="lazy" data-zoom="1"><span class="likes">♥ 11</span></a>
+  <div class="body">
+    <div class="cardhead"><h3>多人远程控制服务</h3><span class="cat">工具遥操作</span></div>
+    
+    <p class="desc">一个中心化的多用户远程控制服务：用 Hugging Face OAuth 登录，每个用户连接自己的机器人，实时视频、双向音频、关节状态监控全部在浏览器里完成。</p>
+    <div class="tags"><span class="tag">HF OAuth</span><span class="tag">多用户</span><span class="tag">视频+音频</span></div>
+    <a class="src" href="https://huggingface.co/spaces/HuggingFaceM4/reachy_mini_remote_control" target="_blank" rel="noopener">HuggingFaceM4/reachy_mini_remote_control ↗</a>
+  </div>
+</article><article class="card" data-cat="life" data-likes="11">
+  <a class="thumb" href="https://huggingface.co/spaces/pollen-robotics/reachy_mini_radio" target="_blank" rel="noopener"><img src="img/app_pollen-robotics__reachy_mini_radio.jpg" alt="官方网络电台" loading="lazy" data-zoom="1"><span class="likes">♥ 11</span></a>
+  <div class="body">
+    <div class="cardhead"><h3>官方网络电台</h3><span class="cat">生活助手</span></div>
+    
+    <p class="desc">官方示例应用：让 Reachy 当一台收音机，播放网络电台的同时用天线和头部做律动，界面极简，是理解“应用如何拿到机器人对象”的最好范本。</p>
+    <div class="tags"><span class="tag">官方示例</span><span class="tag">音频流</span><span class="tag">律动</span></div>
+    <a class="src" href="https://huggingface.co/spaces/pollen-robotics/reachy_mini_radio" target="_blank" rel="noopener">pollen-robotics/reachy_mini_radio ↗</a>
+  </div>
+</article><article class="card" data-cat="life" data-likes="11">
+  <a class="thumb" href="https://huggingface.co/spaces/Boopster/reachy_mini_minder" target="_blank" rel="noopener"><img src="img/app_Boopster__reachy_mini_minder.jpg" alt="用药与健康提醒" loading="lazy" data-zoom="1"><span class="likes">♥ 11</span></a>
+  <div class="body">
+    <div class="cardhead"><h3>用药与健康提醒</h3><span class="cat">生活助手</span></div>
+    <div class="auth">✍️ Becky Still</div>
+    <p class="desc">语音优先的健康陪伴：用自然对话记录用药、跟踪头痛发作、生成给医生看的就诊摘要。技术上是一套完整的语音管线 + 结构化数据落地。</p>
+    <div class="tags"><span class="tag">OpenAI Realtime</span><span class="tag">LangGraph sidecar</span><span class="tag">Neo4j 知识图谱记忆</span><span class="tag">PII 脱敏层</span><span class="tag">本地 SQLite</span></div>
+    <a class="src" href="https://huggingface.co/spaces/Boopster/reachy_mini_minder" target="_blank" rel="noopener">Boopster/reachy_mini_minder ↗</a>
+  </div>
+</article><article class="card" data-cat="life" data-likes="11">
+  <a class="thumb" href="https://huggingface.co/spaces/dlouapre/coding_lab" target="_blank" rel="noopener"><img src="img/app_dlouapre__coding_lab.jpg" alt="Reachy 编程实验室" loading="lazy" data-zoom="1"><span class="likes">♥ 11</span></a>
+  <div class="body">
+    <div class="cardhead"><h3>Reachy 编程实验室</h3><span class="cat">生活助手</span></div>
+    
+    <p class="desc">面向编程入门：在网页里写代码，立刻看到 Reachy 执行；把抽象的循环、变量、函数变成真实的物理动作。</p>
+    <div class="tags"><span class="tag">编程教学</span><span class="tag">即时执行</span></div>
+    <a class="src" href="https://huggingface.co/spaces/dlouapre/coding_lab" target="_blank" rel="noopener">dlouapre/coding_lab ↗</a>
+  </div>
+</article><article class="card" data-cat="tool" data-likes="10">
+  <a class="thumb" href="https://huggingface.co/spaces/pollen-robotics/reachy_mini_remote_control_app" target="_blank" rel="noopener"><img src="img/app_pollen-robotics__reachy_mini_remote_control_app.jpg" alt="机器人端远程接入" loading="lazy" data-zoom="1"><span class="likes">♥ 10</span></a>
+  <div class="body">
+    <div class="cardhead"><h3>机器人端远程接入</h3><span class="cat">工具遥操作</span></div>
+    
+    <p class="desc">给机器人装“反向客户端”：机器人主动以 WebSocket 连到远端服务器（例如 HF Space），从而被远程控制、推流与对讲，适合做无人值守的远程机器人。</p>
+    <div class="tags"><span class="tag">WebSocket 客户端</span><span class="tag">NAT 穿透友好</span></div>
+    <a class="src" href="https://huggingface.co/spaces/pollen-robotics/reachy_mini_remote_control_app" target="_blank" rel="noopener">pollen-robotics/reachy_mini_remote_control_app ↗</a>
+  </div>
+</article><article class="card" data-cat="talk" data-likes="9">
+  <a class="thumb" href="https://huggingface.co/spaces/Halfzipp/reachy_mini_megan" target="_blank" rel="noopener"><img src="img/app_Halfzipp__reachy_mini_megan.jpg" alt="Megan · 毒舌机器人脑" loading="lazy" data-zoom="1"><span class="likes">♥ 9</span></a>
+  <div class="body">
+    <div class="cardhead"><h3>Megan · 毒舌机器人脑</h3><span class="cat">对话陪伴</span></div>
+    
+    <p class="desc">一个“讽刺又戏剧化”的陪伴人格：GPT-4o-mini 驱动，带长期记忆、人脸跟踪（100Hz 平滑跟随）、声源定位转头（利用 4 麦阵列 DOA）、音乐律动、日程提醒与 Google Calendar 集成。</p>
+    <div class="tags"><span class="tag">GPT-4o-mini</span><span class="tag">人脸跟踪 100Hz</span><span class="tag">ReSpeaker DOA 声源定位</span><span class="tag">长期记忆</span><span class="tag">Google Calendar</span></div>
+    <a class="src" href="https://huggingface.co/spaces/Halfzipp/reachy_mini_megan" target="_blank" rel="noopener">Halfzipp/reachy_mini_megan ↗</a>
+  </div>
+</article><article class="card" data-cat="tool" data-likes="9">
+  <a class="thumb" href="https://huggingface.co/spaces/cduss/webrtc_example" target="_blank" rel="noopener"><img src="img/app_cduss__webrtc_example.jpg" alt="单文件 WebRTC 示例" loading="lazy" data-zoom="1"><span class="likes">♥ 9</span></a>
+  <div class="body">
+    <div class="cardhead"><h3>单文件 WebRTC 示例</h3><span class="cat">工具遥操作</span></div>
+    
+    <p class="desc">一个文件讲清 WebRTC 接机器人：登录 Hugging Face、协商连接、拿到视频与音频轨、发送控制指令，是读懂 JS SDK 底层的最佳起点。</p>
+    <div class="tags"><span class="tag">单文件</span><span class="tag">WebRTC 信令</span><span class="tag">HF 登录</span></div>
+    <a class="src" href="https://huggingface.co/spaces/cduss/webrtc_example" target="_blank" rel="noopener">cduss/webrtc_example ↗</a>
+  </div>
+</article><article class="card" data-cat="life" data-likes="9">
+  <a class="thumb" href="https://huggingface.co/spaces/pollen-robotics/reachy_mini_clock" target="_blank" rel="noopener"><img src="img/app_pollen-robotics__reachy_mini_clock.jpg" alt="天线报时时钟" loading="lazy" data-zoom="1"><span class="likes">♥ 9</span></a>
+  <div class="body">
+    <div class="cardhead"><h3>天线报时时钟</h3><span class="cat">生活助手</span></div>
+    
+    <p class="desc">用两根天线当时针和分针报时：天线角度直接映射当前时间，整点会有报时动作。极简但非常上镜。</p>
+    <div class="tags"><span class="tag">官方示例</span><span class="tag">时间映射</span><span class="tag">整点动作</span></div>
+    <a class="src" href="https://huggingface.co/spaces/pollen-robotics/reachy_mini_clock" target="_blank" rel="noopener">pollen-robotics/reachy_mini_clock ↗</a>
+  </div>
+</article><article class="card" data-cat="talk" data-likes="8">
+  <a class="thumb" href="https://huggingface.co/spaces/pollen-robotics/reachy-mini-3d-voice" target="_blank" rel="noopener"><img src="img/app_pollen-robotics__reachy-mini-3d-voice.jpg" alt="3D Voice 网页对话体" loading="lazy" data-zoom="1"><span class="likes">♥ 8</span></a>
+  <div class="body">
+    <div class="cardhead"><h3>3D Voice 网页对话体</h3><span class="cat">对话陪伴</span></div>
+    
+    <p class="desc">把官方实时语音 Demo 里的“球体”换成 three.js 渲染的可动 Reachy Mini 3D 模型：模型会随对话状态做程序化微动作，头部晃动与助手语音同步，情绪和舞蹈动作则直接回放 Pollen 官方录制的轨迹数据集。</p>
+    <div class="tags"><span class="tag">three.js</span><span class="tag">Draco GLB</span><span class="tag">WebSocket</span><span class="tag">官方情绪/舞蹈数据集回放</span></div>
+    <a class="src" href="https://huggingface.co/spaces/pollen-robotics/reachy-mini-3d-voice" target="_blank" rel="noopener">pollen-robotics/reachy-mini-3d-voice ↗</a>
+  </div>
+</article><article class="card" data-cat="edu" data-likes="8">
+  <a class="thumb" href="https://huggingface.co/spaces/CoWonder-ai/reachy-mini-apps" target="_blank" rel="noopener"><img src="img/app_CoWonder-ai__reachy-mini-apps.jpg" alt="CoWonder 儿童教育套件" loading="lazy" data-zoom="1"><span class="likes">♥ 8</span></a>
+  <div class="body">
+    <div class="cardhead"><h3>CoWonder 儿童教育套件</h3><span class="cat">教育游戏</span></div>
+    
+    <p class="desc">八个面向亲子场景的教育应用打包发布：情绪镜子（机器人模仿你的表情）、Simon Says 姿势游戏、Science Lab 提问实验、语言伙伴、I-Spy 寻物、动物猜谜、用自然语言“编程”机器人、教机器人学新行为。</p>
+    <div class="tags"><span class="tag">亲子教育</span><span class="tag">表情模仿</span><span class="tag">自然语言编程</span></div>
+    <a class="src" href="https://huggingface.co/spaces/CoWonder-ai/reachy-mini-apps" target="_blank" rel="noopener">CoWonder-ai/reachy-mini-apps ↗</a>
+  </div>
+</article><article class="card" data-cat="life" data-likes="8">
+  <a class="thumb" href="https://huggingface.co/spaces/pollen-robotics/reachy_mini_greetings" target="_blank" rel="noopener"><img src="img/app_pollen-robotics__reachy_mini_greetings.jpg" alt="起床问候" loading="lazy" data-zoom="1"><span class="likes">♥ 8</span></a>
+  <div class="body">
+    <div class="cardhead"><h3>起床问候</h3><span class="cat">生活助手</span></div>
+    
+    <p class="desc">机器人醒来后主动打招呼：伸懒腰、转头寻找、挥手、说早安。适合放在桌面上当作一天的开始。</p>
+    <div class="tags"><span class="tag">官方示例</span><span class="tag">唤醒动作序列</span></div>
+    <a class="src" href="https://huggingface.co/spaces/pollen-robotics/reachy_mini_greetings" target="_blank" rel="noopener">pollen-robotics/reachy_mini_greetings ↗</a>
+  </div>
+</article><article class="card" data-cat="edu" data-likes="7">
+  <a class="thumb" href="https://huggingface.co/spaces/chelleboyer/reachy_mini_remix" target="_blank" rel="noopener"><img src="img/app_chelleboyer__reachy_mini_remix.jpg" alt="舞蹈积木编排（儿童向）" loading="lazy" data-zoom="1"><span class="likes">♥ 7</span></a>
+  <div class="body">
+    <div class="cardhead"><h3>舞蹈积木编排（儿童向）</h3><span class="cat">教育游戏</span></div>
+    
+    <p class="desc">用 Gradio 做的“搭积木式”编舞台：每个舞步是一块带 emoji 的按钮，点一点就加入序列，然后让 Reachy 一次性跳完整段。内置官方 18 个舞步，支持多套界面主题。</p>
+    <div class="tags"><span class="tag">Gradio</span><span class="tag">18 个官方舞步</span><span class="tag">序列编排</span></div>
+    <a class="src" href="https://huggingface.co/spaces/chelleboyer/reachy_mini_remix" target="_blank" rel="noopener">chelleboyer/reachy_mini_remix ↗</a>
+  </div>
+</article><article class="card" data-cat="edu" data-likes="7">
+  <a class="thumb" href="https://huggingface.co/spaces/chitrark/reachy_mini_bookreader" target="_blank" rel="noopener"><img src="img/app_chitrark__reachy_mini_bookreader.jpg" alt="会读绘本的机器人" loading="lazy" data-zoom="1"><span class="likes">♥ 7</span></a>
+  <div class="body">
+    <div class="cardhead"><h3>会读绘本的机器人</h3><span class="cat">教育游戏</span></div>
+    <div class="auth">✍️ rajasekaran</div>
+    <p class="desc">给孩子的阅读机器人：摄像头看页面/听你翻页，用不同角色的音色朗读，配合情节做表情动作，把“读绘本”变成有表演的互动。</p>
+    <div class="tags"><span class="tag">OCR 走独立 Space</span><span class="tag">三层 TTS 降级</span><span class="tag">espeak 参数级角色音</span><span class="tag">Claude 生成理解题</span></div>
+    <a class="src" href="https://huggingface.co/spaces/chitrark/reachy_mini_bookreader" target="_blank" rel="noopener">chitrark/reachy_mini_bookreader ↗</a>
+  </div>
+</article><article class="card" data-cat="music" data-likes="7">
+  <a class="thumb" href="https://huggingface.co/spaces/Boopster/reachy_mini_ukulele_tuner" target="_blank" rel="noopener"><img src="img/app_Boopster__reachy_mini_ukulele_tuner.jpg" alt="尤克里里调音器" loading="lazy" data-zoom="1"><span class="likes">♥ 7</span></a>
+  <div class="body">
+    <div class="cardhead"><h3>尤克里里调音器</h3><span class="cat">音乐节奏</span></div>
+    
+    <p class="desc">用机器人的麦克风听你弹尤克里里，实时判断音准，走音时天线歪向一边，准了就竖起来——把调音变成看得见的反馈。</p>
+    <div class="tags"><span class="tag">音高检测</span><span class="tag">麦克风输入</span></div>
+    <a class="src" href="https://huggingface.co/spaces/Boopster/reachy_mini_ukulele_tuner" target="_blank" rel="noopener">Boopster/reachy_mini_ukulele_tuner ↗</a>
+  </div>
+</article><article class="card" data-cat="talk" data-likes="6">
+  <a class="thumb" href="https://huggingface.co/spaces/n0012/reachy_mini_conversation_app_gemini" target="_blank" rel="noopener"><img src="img/app_n0012__reachy_mini_conversation_app_gemini.jpg" alt="Gemini Live 版对话（带记忆）" loading="lazy" data-zoom="1"><span class="likes">♥ 6</span></a>
+  <div class="body">
+    <div class="cardhead"><h3>Gemini Live 版对话（带记忆）</h3><span class="cat">对话陪伴</span></div>
+    <div class="auth">✍️ Nick Losier</div>
+    <p class="desc">把官方对话应用重写为 Gemini Live API 版本，新增按用户隔离的持久记忆、按 profile 挂载的 MCP 工具，以及离线唤醒词。全部通过机器人上的无头浏览器界面管理。</p>
+    <div class="tags"><span class="tag">Gemini Live API</span><span class="tag">三阶段持久记忆</span><span class="tag">MCP 三种传输</span><span class="tag">Edge Impulse 离线唤醒词</span><span class="tag">17 个人格 profile</span></div>
+    <a class="src" href="https://huggingface.co/spaces/n0012/reachy_mini_conversation_app_gemini" target="_blank" rel="noopener">n0012/reachy_mini_conversation_app_gemini ↗</a>
+  </div>
+</article><article class="card" data-cat="edu" data-likes="6">
+  <a class="thumb" href="https://huggingface.co/spaces/apirrone/reachy_mini_simon" target="_blank" rel="noopener"><img src="img/app_apirrone__reachy_mini_simon.jpg" alt="Simon Says 记忆游戏" loading="lazy" data-zoom="1"><span class="likes">♥ 6</span></a>
+  <div class="body">
+    <div class="cardhead"><h3>Simon Says 记忆游戏</h3><span class="cat">教育游戏</span></div>
+    
+    <p class="desc">经典 Simon 游戏的机器人版：Reachy 用手势/姿势序列出题，玩家复述，答错天线就耷拉下来。有 Python 与 JS 两个版本。</p>
+    <div class="tags"><span class="tag">姿势序列</span><span class="tag">游戏逻辑</span><span class="tag">Python + JS 双版本</span></div>
+    <a class="src" href="https://huggingface.co/spaces/apirrone/reachy_mini_simon" target="_blank" rel="noopener">apirrone/reachy_mini_simon ↗</a>
+  </div>
+</article><article class="card" data-cat="music" data-likes="6">
+  <a class="thumb" href="https://huggingface.co/spaces/Boopster/reachy_mini_danceml" target="_blank" rel="noopener"><img src="img/app_Boopster__reachy_mini_danceml.jpg" alt="DanceML 语音编舞" loading="lazy" data-zoom="1"><span class="likes">♥ 6</span></a>
+  <div class="body">
+    <div class="cardhead"><h3>DanceML 语音编舞</h3><span class="cat">音乐节奏</span></div>
+    
+    <p class="desc">用自然语言指挥机器人跳舞：OpenAI Realtime 做语音入口，11 个 function-calling 工具负责动作控制，内置 101 个预录舞蹈与情绪动作，另有一个 GPT-4.1 规划器负责多步编舞，还支持用波形函数程序化生成连续动画。</p>
+    <div class="tags"><span class="tag">OpenAI Realtime</span><span class="tag">11 个 function-calling 工具</span><span class="tag">101 个预录动作</span><span class="tag">GPT-4.1 序列规划</span><span class="tag">波形程序化动画</span></div>
+    <a class="src" href="https://huggingface.co/spaces/Boopster/reachy_mini_danceml" target="_blank" rel="noopener">Boopster/reachy_mini_danceml ↗</a>
+  </div>
+</article><article class="card" data-cat="tool" data-likes="6">
+  <a class="thumb" href="https://huggingface.co/spaces/apirrone/reachy_mini_phone_teleop" target="_blank" rel="noopener"><img src="img/app_apirrone__reachy_mini_phone_teleop.jpg" alt="用手机遥控" loading="lazy" data-zoom="1"><span class="likes">♥ 6</span></a>
+  <div class="body">
+    <div class="cardhead"><h3>用手机遥控</h3><span class="cat">工具遥操作</span></div>
+    
+    <p class="desc">把手机变成遥控器：利用手机的姿态传感器（陀螺仪/加速度计）直接映射到机器人头部姿态，倾斜手机就是转动头部，演示效果极佳。</p>
+    <div class="tags"><span class="tag">手机传感器</span><span class="tag">姿态映射</span></div>
+    <a class="src" href="https://huggingface.co/spaces/apirrone/reachy_mini_phone_teleop" target="_blank" rel="noopener">apirrone/reachy_mini_phone_teleop ↗</a>
+  </div>
+</article><article class="card" data-cat="tool" data-likes="6">
+  <a class="thumb" href="https://huggingface.co/spaces/RemiFabre/microduck-reachy-simulator" target="_blank" rel="noopener"><img src="img/app_RemiFabre__microduck-reachy-simulator.jpg" alt="橡皮鸭 + Reachy 同场仿真" loading="lazy" data-zoom="1"><span class="likes">♥ 6</span></a>
+  <div class="body">
+    <div class="cardhead"><h3>橡皮鸭 + Reachy 同场仿真</h3><span class="cat">工具遥操作</span></div>
+    
+    <p class="desc">在浏览器里跑一个共享的 MuJoCo 世界，把 Reachy Mini 和 MicroDuck 放在同一个物理场景里，纯前端、无需硬件，适合做多机器人协作实验。</p>
+    <div class="tags"><span class="tag">MuJoCo WASM</span><span class="tag">浏览器仿真</span><span class="tag">多机器人</span></div>
+    <a class="src" href="https://huggingface.co/spaces/RemiFabre/microduck-reachy-simulator" target="_blank" rel="noopener">RemiFabre/microduck-reachy-simulator ↗</a>
+  </div>
+</article><article class="card" data-cat="dev" data-likes="6">
+  <a class="thumb" href="https://huggingface.co/spaces/pollen-robotics/reachy-mini-text-to-motion" target="_blank" rel="noopener"><img src="img/app_pollen-robotics__reachy-mini-text-to-motion.jpg" alt="文字生成动作（前沿）" loading="lazy" data-zoom="1"><span class="likes">♥ 6</span></a>
+  <div class="body">
+    <div class="cardhead"><h3>文字生成动作（前沿）</h3><span class="cat">开发平台</span></div>
+    
+    <p class="desc">官方实验室项目，瞄准生态里最缺的一环：一句自然语言 → 一段全新的表现力动作。建立在社区动作库之上（407 个动作 / 52 个带 reachy_mini_community_moves 标签的数据集）。生成分两段：先生成“表演简报”，再由 LLM 写出基于曲线的 motion clip（独立关键帧 + 命名缓动 + 程序化振荡器），最后夹取到语料库推导出的安全范围并求值成标准 recorded-move JSON。</p>
+    <div class="tags"><span class="tag">LLM 动作生成</span><span class="tag">Blender F-curve 风格</span><span class="tag">407 个社区动作</span><span class="tag">标准动作 JSON</span></div>
+    <a class="src" href="https://huggingface.co/spaces/pollen-robotics/reachy-mini-text-to-motion" target="_blank" rel="noopener">pollen-robotics/reachy-mini-text-to-motion ↗</a>
+  </div>
+</article><article class="card" data-cat="dev" data-likes="6">
+  <a class="thumb" href="https://huggingface.co/spaces/tfrere/reachy-mini-vibe-coding-apps" target="_blank" rel="noopener"><img src="img/app_tfrere__reachy-mini-vibe-coding-apps.jpg" alt="Vibe Coding 应用合集" loading="lazy" data-zoom="1"><span class="likes">♥ 6</span></a>
+  <div class="body">
+    <div class="cardhead"><h3>Vibe Coding 应用合集</h3><span class="cat">开发平台</span></div>
+    
+    <p class="desc">“用嘴写小应用”的示范合集：一批极小的静态 Reachy 应用，全部由 AI 代理对话式生成，展示 vibe coding 时代的开发范式。</p>
+    <div class="tags"><span class="tag">Vibe Coding</span><span class="tag">静态 JS 应用</span></div>
+    <a class="src" href="https://huggingface.co/spaces/tfrere/reachy-mini-vibe-coding-apps" target="_blank" rel="noopener">tfrere/reachy-mini-vibe-coding-apps ↗</a>
+  </div>
+</article><article class="card" data-cat="edu" data-likes="6">
+  <a class="thumb" href="https://huggingface.co/spaces/pollen-robotics/bedtime-story-generator" target="_blank" rel="noopener"><img src="img/app_pollen-robotics__bedtime-story-generator.jpg" alt="睡前故事生成器" loading="lazy" data-zoom="1"><span class="likes">♥ 6</span></a>
+  <div class="body">
+    <div class="cardhead"><h3>睡前故事生成器</h3><span class="cat">教育游戏</span></div>
+    
+    <p class="desc">官方浏览器应用：在浏览器里用 Gemma 3 270M（ONNX 量化版）本地生成睡前故事，再让 Reachy 讲给孩子听。用 JS 应用路线（reachy_mini_js_app）实现，是“小模型 + 浏览器 + 机器人”的官方范本。</p>
+    <div class="tags"><span class="tag">Gemma 3 270M ONNX</span><span class="tag">浏览器内推理</span><span class="tag">JS 应用</span></div>
+    <a class="src" href="https://huggingface.co/spaces/pollen-robotics/bedtime-story-generator" target="_blank" rel="noopener">pollen-robotics/bedtime-story-generator ↗</a>
+  </div>
+</article><article class="card" data-cat="dev" data-likes="6">
+  <a class="thumb" href="https://huggingface.co/spaces/pollen-robotics/reachy-sticker-generator" target="_blank" rel="noopener"><img src="img/app_pollen-robotics__reachy-sticker-generator.jpg" alt="贴纸生成器" loading="lazy" data-zoom="1"><span class="likes">♥ 6</span></a>
+  <div class="body">
+    <div class="cardhead"><h3>贴纸生成器</h3><span class="cat">开发平台</span></div>
+    
+    <p class="desc">用文字提示生成可爱的 Reachy 贴纸：先用 Nano Banana 做角色一致性生成（带参考图），再自动去背景（BRIA RMBG）并矢量化（Recraft），产出透明背景成品可直接下载。和机器人本体无关，但是社区周边的好玩工具。</p>
+    <div class="tags"><span class="tag">Nano Banana</span><span class="tag">BRIA RMBG 去背景</span><span class="tag">Recraft 矢量化</span></div>
+    <a class="src" href="https://huggingface.co/spaces/pollen-robotics/reachy-sticker-generator" target="_blank" rel="noopener">pollen-robotics/reachy-sticker-generator ↗</a>
+  </div>
+</article><article class="card" data-cat="talk" data-likes="5">
+  <a class="thumb" href="https://huggingface.co/spaces/mindmodelai/reachy-mini-elevenlabs" target="_blank" rel="noopener"><img src="img/app_mindmodelai__reachy-mini-elevenlabs.jpg" alt="ElevenLabs 情感对话" loading="lazy" data-zoom="1"><span class="likes">♥ 5</span></a>
+  <div class="body">
+    <div class="cardhead"><h3>ElevenLabs 情感对话</h3><span class="cat">对话陪伴</span></div>
+    <div class="auth">✍️ mindmodel.ai × ageai.io <span>· 两家公司联名开源</span></div>
+    <p class="desc">接入 ElevenLabs Conversational AI 平台，自动从回复文本中检测情绪，并把情绪映射成表情动作——生气时天线后压、开心时头部上扬，语音与身体同步。</p>
+    <div class="tags"><span class="tag">ElevenLabs Agents</span><span class="tag">正则规则情绪检测（非模型）</span><span class="tag">官方情绪库回放</span><span class="tag">3 秒冷却</span></div>
+    <a class="src" href="https://huggingface.co/spaces/mindmodelai/reachy-mini-elevenlabs" target="_blank" rel="noopener">mindmodelai/reachy-mini-elevenlabs ↗</a>
+  </div>
+</article><article class="card" data-cat="edu" data-likes="5">
+  <a class="thumb" href="https://huggingface.co/spaces/build-small-hackathon/reachy-mini-interpreter" target="_blank" rel="noopener"><img src="img/app_build-small-hackathon__reachy-mini-interpreter.jpg" alt="Reachy Bridge · 同声传译" loading="lazy" data-zoom="1"><span class="likes">♥ 5</span></a>
+  <div class="body">
+    <div class="cardhead"><h3>Reachy Bridge · 同声传译</h3><span class="cat">教育游戏</span></div>
+    
+    <p class="desc">零配置的双向语音翻译官：SeamlessM4T v2 一个模型同时完成识别+翻译+目标语言发声，祖辈说印地语、孩子听中文。网页里还有一个会跟着反应的 3D Reachy；本地运行时实体机器人会转头、点头、开口。</p>
+    <div class="tags"><span class="tag">SeamlessM4T v2</span><span class="tag">零 API Key</span><span class="tag">3D 预览</span></div>
+    <a class="src" href="https://huggingface.co/spaces/build-small-hackathon/reachy-mini-interpreter" target="_blank" rel="noopener">build-small-hackathon/reachy-mini-interpreter ↗</a>
+  </div>
+</article><article class="card" data-cat="tool" data-likes="5">
+  <a class="thumb" href="https://huggingface.co/spaces/cduss/reachy_mini_simple_control_panel" target="_blank" rel="noopener"><img src="img/app_cduss__reachy_mini_simple_control_panel.jpg" alt="极简控制面板" loading="lazy" data-zoom="1"><span class="likes">♥ 5</span></a>
+  <div class="body">
+    <div class="cardhead"><h3>极简控制面板</h3><span class="cat">工具遥操作</span></div>
+    
+    <p class="desc">纯 HTML/CSS/JavaScript 写的零依赖控制面板，通过 WebSocket 直连机器人：任务空间头部位姿（X/Y/Z/Roll/Pitch/Yaw）、底座偏航、天线角度全部可调，断线自动重连。</p>
+    <div class="tags"><span class="tag">零依赖</span><span class="tag">WebSocket</span><span class="tag">任务空间控制</span></div>
+    <a class="src" href="https://huggingface.co/spaces/cduss/reachy_mini_simple_control_panel" target="_blank" rel="noopener">cduss/reachy_mini_simple_control_panel ↗</a>
+  </div>
+</article><article class="card" data-cat="life" data-likes="5">
+  <a class="thumb" href="https://huggingface.co/spaces/dlouapre/reachy_mini_astronomer" target="_blank" rel="noopener"><img src="img/app_dlouapre__reachy_mini_astronomer.jpg" alt="天文向导" loading="lazy" data-zoom="1"><span class="likes">♥ 5</span></a>
+  <div class="body">
+    <div class="cardhead"><h3>天文向导</h3><span class="cat">生活助手</span></div>
+    
+    <p class="desc">把对话应用锁成“天文学家”人格，并加上真实天文计算：问它猎户座在哪、木星今晚可见吗，它会算出方位角与高度角，然后用头部**物理指向**那颗星。</p>
+    <div class="tags"><span class="tag">天文历算</span><span class="tag">指向控制</span><span class="tag">对话 fork</span></div>
+    <a class="src" href="https://huggingface.co/spaces/dlouapre/reachy_mini_astronomer" target="_blank" rel="noopener">dlouapre/reachy_mini_astronomer ↗</a>
+  </div>
+</article><article class="card" data-cat="life" data-likes="5">
+  <a class="thumb" href="https://huggingface.co/spaces/pollen-robotics/reachy-mini-chatbox" target="_blank" rel="noopener"><img src="img/app_pollen-robotics__reachy-mini-chatbox.jpg" alt="实时聊天墙" loading="lazy" data-zoom="1"><span class="likes">♥ 5</span></a>
+  <div class="body">
+    <div class="cardhead"><h3>实时聊天墙</h3><span class="cat">生活助手</span></div>
+    
+    <p class="desc">让远程观众和机器人互动：网页聊天消息会被机器人读出来并配上动作，适合直播与展会场景。</p>
+    <div class="tags"><span class="tag">聊天接入</span><span class="tag">TTS</span><span class="tag">直播</span></div>
+    <a class="src" href="https://huggingface.co/spaces/pollen-robotics/reachy-mini-chatbox" target="_blank" rel="noopener">pollen-robotics/reachy-mini-chatbox ↗</a>
+  </div>
+</article><article class="card" data-cat="talk" data-likes="4">
+  <a class="thumb" href="https://huggingface.co/spaces/Enricx/reachy_mini_gpt_live" target="_blank" rel="noopener"><img src="img/app_Enricx__reachy_mini_gpt_live.jpg" alt="GPT-Live 十分钟上手指南" loading="lazy" data-zoom="1"><span class="likes">♥ 4</span></a>
+  <div class="body">
+    <div class="cardhead"><h3>GPT-Live 十分钟上手指南</h3><span class="cat">对话陪伴</span></div>
+    
+    <p class="desc">一份荷兰语/英语双语的“开箱到对话”指南式应用：机器人 + 麦克风 + API Key，十分钟把 GPT-Live 语音通话跑起来，适合作为第一条成功链路。</p>
+    <div class="tags"><span class="tag">OpenAI GPT-Live</span><span class="tag">WebRTC</span><span class="tag">新手向</span></div>
+    <a class="src" href="https://huggingface.co/spaces/Enricx/reachy_mini_gpt_live" target="_blank" rel="noopener">Enricx/reachy_mini_gpt_live ↗</a>
+  </div>
+</article><article class="card" data-cat="tool" data-likes="4">
+  <a class="thumb" href="https://huggingface.co/spaces/totosolat/reachy_mini_keyboard_teleop" target="_blank" rel="noopener"><img src="img/app_totosolat__reachy_mini_keyboard_teleop.jpg" alt="键盘遥操作" loading="lazy" data-zoom="1"><span class="likes">♥ 4</span></a>
+  <div class="body">
+    <div class="cardhead"><h3>键盘遥操作</h3><span class="cat">工具遥操作</span></div>
+    
+    <p class="desc">网页版键盘遥控：支持 AZERTY/QWERTY/自定义布局，可切 POV 反向模式，速度、旋转、天线参数都能调，右侧实时显示位置与姿态反馈。</p>
+    <div class="tags"><span class="tag">WebSocket</span><span class="tag">多键盘布局</span><span class="tag">实时状态回显</span></div>
+    <a class="src" href="https://huggingface.co/spaces/totosolat/reachy_mini_keyboard_teleop" target="_blank" rel="noopener">totosolat/reachy_mini_keyboard_teleop ↗</a>
+  </div>
+</article><article class="card" data-cat="dev" data-likes="4">
+  <a class="thumb" href="https://huggingface.co/spaces/pollen-robotics/reachy-mini-search-tool" target="_blank" rel="noopener"><img src="img/app_pollen-robotics__reachy-mini-search-tool.jpg" alt="MCP 联网搜索工具" loading="lazy" data-zoom="1"><span class="likes">♥ 4</span></a>
+  <div class="body">
+    <div class="cardhead"><h3>MCP 联网搜索工具</h3><span class="cat">开发平台</span></div>
+    
+    <p class="desc">官方 MCP 工具 Space：给对话机器人加上 DuckDuckGo 联网搜索能力，可被任何支持 MCP 的对话应用挂载。</p>
+    <div class="tags"><span class="tag">MCP</span><span class="tag">DuckDuckGo</span></div>
+    <a class="src" href="https://huggingface.co/spaces/pollen-robotics/reachy-mini-search-tool" target="_blank" rel="noopener">pollen-robotics/reachy-mini-search-tool ↗</a>
+  </div>
+</article><article class="card" data-cat="dev" data-likes="4">
+  <a class="thumb" href="https://huggingface.co/spaces/pollen-robotics/reachy-mini-social-wall" target="_blank" rel="noopener"><img src="img/app_pollen-robotics__reachy-mini-social-wall.jpg" alt="社区动态墙" loading="lazy" data-zoom="1"><span class="likes">♥ 4</span></a>
+  <div class="body">
+    <div class="cardhead"><h3>社区动态墙</h3><span class="cat">开发平台</span></div>
+    
+    <p class="desc">聚合 Bluesky、YouTube、LinkedIn、TikTok、Reddit、X 上关于 Reachy Mini 的社区帖子，AI 过滤并分类成动态墙——想看别人在玩什么，从这里开始。</p>
+    <div class="tags"><span class="tag">社交聚合</span><span class="tag">AI 分类</span></div>
+    <a class="src" href="https://huggingface.co/spaces/pollen-robotics/reachy-mini-social-wall" target="_blank" rel="noopener">pollen-robotics/reachy-mini-social-wall ↗</a>
+  </div>
+</article><article class="card" data-cat="talk" data-likes="3">
+  <a class="thumb" href="https://huggingface.co/spaces/to-be/reachy_mini_receptionist" target="_blank" rel="noopener"><img src="img/app_to-be__reachy_mini_receptionist.jpg" alt="AI 前台接待" loading="lazy" data-zoom="1"><span class="likes">♥ 3</span></a>
+  <div class="body">
+    <div class="cardhead"><h3>AI 前台接待</h3><span class="cat">对话陪伴</span></div>
+    
+    <p class="desc">接待场景变体：人脸检测 + 人脸识别（本地 guests/ 相册）+ 实时语音 + 硬编码日历查询 + 邮件外发工具，配套一块实时标注的接待看板。GitHub 上有完整演示视频。</p>
+    <div class="tags"><span class="tag">OpenAI Realtime</span><span class="tag">人脸识别</span><span class="tag">工具调用</span><span class="tag">看板</span></div>
+    <a class="src" href="https://huggingface.co/spaces/to-be/reachy_mini_receptionist" target="_blank" rel="noopener">to-be/reachy_mini_receptionist ↗</a>
+  </div>
+</article><article class="card" data-cat="music" data-likes="3">
+  <a class="thumb" href="https://huggingface.co/spaces/Taikos/reachy_mini_speaker" target="_blank" rel="noopener"><img src="img/app_Taikos__reachy_mini_speaker.jpg" alt="AirPlay / Spotify 音箱" loading="lazy" data-zoom="1"><span class="likes">♥ 3</span></a>
+  <div class="body">
+    <div class="cardhead"><h3>AirPlay / Spotify 音箱</h3><span class="cat">音乐节奏</span></div>
+    <div class="auth">✍️ Arthur G.</div>
+    <p class="desc">把 Reachy 变成全屋智能音箱：基于 shairport-sync 支持 AirPlay，基于 librespot 支持 Spotify Connect，手机上直接在设备列表里选 Reachy。播放时它会跟着节拍跳舞。</p>
+    <div class="tags"><span class="tag">shairport-sync</span><span class="tag">librespot</span><span class="tag">onset 自相关测 BPM</span><span class="tag">100Hz 控制环</span><span class="tag">非 Apple MFi / 非 Spotify 授权</span></div>
+    <a class="src" href="https://huggingface.co/spaces/Taikos/reachy_mini_speaker" target="_blank" rel="noopener">Taikos/reachy_mini_speaker ↗</a>
+  </div>
+</article><article class="card" data-cat="tool" data-likes="3">
+  <a class="thumb" href="https://huggingface.co/spaces/askuric/reachy-mini-js" target="_blank" rel="noopener"><img src="img/app_askuric__reachy-mini-js.jpg" alt="纯 JS 仿真器" loading="lazy" data-zoom="1"><span class="likes">♥ 3</span></a>
+  <div class="body">
+    <div class="cardhead"><h3>纯 JS 仿真器</h3><span class="cat">工具遥操作</span></div>
+    
+    <p class="desc">完全用 JavaScript 实现的 Reachy Mini 仿真器：不需要 Python、不需要机器人，在网页里就能验证运动学与动作序列。</p>
+    <div class="tags"><span class="tag">纯 JS</span><span class="tag">仿真</span></div>
+    <a class="src" href="https://huggingface.co/spaces/askuric/reachy-mini-js" target="_blank" rel="noopener">askuric/reachy-mini-js ↗</a>
+  </div>
+</article><article class="card" data-cat="dev" data-likes="3">
+  <a class="thumb" href="https://huggingface.co/spaces/tfrere/reachy-moves-gallery" target="_blank" rel="noopener"><img src="img/app_tfrere__reachy-moves-gallery.jpg" alt="社区动作预览画廊" loading="lazy" data-zoom="1"><span class="likes">♥ 3</span></a>
+  <div class="body">
+    <div class="cardhead"><h3>社区动作预览画廊</h3><span class="cat">开发平台</span></div>
+    
+    <p class="desc">为社区动作库做的视频画廊：所有打上 reachy_mini_community_moves 标签的动作，都在 HF Jobs 上由无头 Blender 渲染成视频，网页通过 Hub API 懒加载流式播放，鼠标悬停静音预览，点击开声。</p>
+    <div class="tags"><span class="tag">无头 Blender 渲染</span><span class="tag">HF Jobs</span><span class="tag">HF 数据集</span></div>
+    <a class="src" href="https://huggingface.co/spaces/tfrere/reachy-moves-gallery" target="_blank" rel="noopener">tfrere/reachy-moves-gallery ↗</a>
+  </div>
+</article><article class="card" data-cat="edu" data-likes="2">
+  <a class="thumb" href="https://huggingface.co/spaces/Boopster/reachy_mini_reaction_game" target="_blank" rel="noopener"><img src="img/app_Boopster__reachy_mini_reaction_game.jpg" alt="天线反应力游戏" loading="lazy" data-zoom="1"><span class="likes">♥ 2</span></a>
+  <div class="body">
+    <div class="cardhead"><h3>天线反应力游戏</h3><span class="cat">教育游戏</span></div>
+    
+    <p class="desc">谁先拍手谁赢：天线竖起就是信号，玩家要在最短时间内拍手，机器人记录反应时间并做出夸张的胜负反应。</p>
+    <div class="tags"><span class="tag">实时控制环</span><span class="tag">音频触发</span></div>
+    <a class="src" href="https://huggingface.co/spaces/Boopster/reachy_mini_reaction_game" target="_blank" rel="noopener">Boopster/reachy_mini_reaction_game ↗</a>
+  </div>
+</article><article class="card" data-cat="tool" data-likes="2">
+  <a class="thumb" href="https://huggingface.co/spaces/RemiFabre/reachy_mini_tap_lab" target="_blank" rel="noopener"><img src="img/app_RemiFabre__reachy_mini_tap_lab.jpg" alt="天线敲击实验室" loading="lazy" data-zoom="1"><span class="likes">♥ 2</span></a>
+  <div class="body">
+    <div class="cardhead"><h3>天线敲击实验室</h3><span class="cat">工具遥操作</span></div>
+    
+    <p class="desc">把天线当成输入设备：敲击天线会被识别成“按键”，页面上能看到每一次敲击的强度与波形，还有专门的教学关卡教你复现“天线抖一抖”的手感。</p>
+    <div class="tags"><span class="tag">天线当按钮</span><span class="tag">力度识别</span></div>
+    <a class="src" href="https://huggingface.co/spaces/RemiFabre/reachy_mini_tap_lab" target="_blank" rel="noopener">RemiFabre/reachy_mini_tap_lab ↗</a>
+  </div>
+</article><article class="card" data-cat="tool" data-likes="2">
+  <a class="thumb" href="https://huggingface.co/spaces/askuric/reachy-mini-viewer" target="_blank" rel="noopener"><img src="img/app_askuric__reachy-mini-viewer.jpg" alt="交互式查看器" loading="lazy" data-zoom="1"><span class="likes">♥ 2</span></a>
+  <div class="body">
+    <div class="cardhead"><h3>交互式查看器</h3><span class="cat">工具遥操作</span></div>
+    
+    <p class="desc">Docker 化的交互式 3D 查看器，用来快速检查动作、关节范围与姿态，不占用实体机器人。</p>
+    <div class="tags"><span class="tag">Docker</span><span class="tag">3D 查看</span></div>
+    <a class="src" href="https://huggingface.co/spaces/askuric/reachy-mini-viewer" target="_blank" rel="noopener">askuric/reachy-mini-viewer ↗</a>
+  </div>
+</article><article class="card" data-cat="life" data-likes="2">
+  <a class="thumb" href="https://huggingface.co/spaces/adonaivera/reachy_mini_pomodoro" target="_blank" rel="noopener"><img src="img/app_adonaivera__reachy_mini_pomodoro.jpg" alt="番茄钟 + 语音助手" loading="lazy" data-zoom="1"><span class="likes">♥ 2</span></a>
+  <div class="body">
+    <div class="cardhead"><h3>番茄钟 + 语音助手</h3><span class="cat">生活助手</span></div>
+    
+    <p class="desc">生产力场景：25 分钟专注 + 5 分钟短休 + 15 分钟长休，唤醒词 “Compita”，支持任务创建与语音交互，到点会用动作和语音提醒你休息。</p>
+    <div class="tags"><span class="tag">唤醒词</span><span class="tag">任务管理</span><span class="tag">番茄钟</span></div>
+    <a class="src" href="https://huggingface.co/spaces/adonaivera/reachy_mini_pomodoro" target="_blank" rel="noopener">adonaivera/reachy_mini_pomodoro ↗</a>
+  </div>
+</article><article class="card" data-cat="life" data-likes="2">
+  <a class="thumb" href="https://huggingface.co/spaces/PierreRouanet/reachy_mini_surf_report" target="_blank" rel="noopener"><img src="img/app_PierreRouanet__reachy_mini_surf_report.jpg" alt="冲浪预报播报" loading="lazy" data-zoom="1"><span class="likes">♥ 2</span></a>
+  <div class="body">
+    <div class="cardhead"><h3>冲浪预报播报</h3><span class="cat">生活助手</span></div>
+    
+    <p class="desc">小而美：Reachy 每天早上为你读当地冲浪预报（浪高、周期、风向），用动作强调关键数字。</p>
+    <div class="tags"><span class="tag">天气 API</span><span class="tag">语音播报</span></div>
+    <a class="src" href="https://huggingface.co/spaces/PierreRouanet/reachy_mini_surf_report" target="_blank" rel="noopener">PierreRouanet/reachy_mini_surf_report ↗</a>
+  </div>
+</article><article class="card" data-cat="dev" data-likes="2">
+  <a class="thumb" href="https://huggingface.co/spaces/panny247/reachy-mini-leaderboard" target="_blank" rel="noopener"><div class="noimg">🤖</div><span class="likes">♥ 2</span></a>
+  <div class="body">
+    <div class="cardhead"><h3>应用点赞排行榜</h3><span class="cat">开发平台</span></div>
+    
+    <p class="desc">自动发现所有打了 reachy-mini 标签的 Space，按点赞数排名，每 5 分钟刷新——社区应用热度的实时榜单。</p>
+    <div class="tags"><span class="tag">自动发现</span><span class="tag">排行榜</span></div>
+    <a class="src" href="https://huggingface.co/spaces/panny247/reachy-mini-leaderboard" target="_blank" rel="noopener">panny247/reachy-mini-leaderboard ↗</a>
+  </div>
+</article><article class="card" data-cat="dev" data-likes="2">
+  <a class="thumb" href="https://huggingface.co/spaces/curtburk/reachy-mini-developer-guide" target="_blank" rel="noopener"><img src="img/app_curtburk__reachy-mini-developer-guide.jpg" alt="开发者实战踩坑指南" loading="lazy" data-zoom="1"><span class="likes">♥ 2</span></a>
+  <div class="body">
+    <div class="cardhead"><h3>开发者实战踩坑指南</h3><span class="cat">开发平台</span></div>
+    
+    <p class="desc">一份“我多希望早点知道”的非官方实战指南，作者是 HP 的技术产品经理，内容来自他亲手搭建并部署一个语音 AI 代理的全过程：环境、模式、部署与常见陷阱。</p>
+    <div class="tags"><span class="tag">实战经验</span><span class="tag">部署模式</span></div>
+    <a class="src" href="https://huggingface.co/spaces/curtburk/reachy-mini-developer-guide" target="_blank" rel="noopener">curtburk/reachy-mini-developer-guide ↗</a>
+  </div>
+</article><article class="card" data-cat="talk" data-likes="1">
+  <a class="thumb" href="https://huggingface.co/spaces/Boyston/reachy_mini_language_tutor" target="_blank" rel="noopener"><img src="img/app_Boyston__reachy_mini_language_tutor.jpg" alt="语言陪练" loading="lazy" data-zoom="1"><span class="likes">♥ 1</span></a>
+  <div class="body">
+    <div class="cardhead"><h3>语言陪练</h3><span class="cat">对话陪伴</span></div>
+    
+    <p class="desc">把 Reachy 变成口语陪练：日常场景对话、纠音、主动提问，用机器人的存在感降低开口压力。</p>
+    <div class="tags"><span class="tag">对话应用 fork</span><span class="tag">教育场景</span></div>
+    <a class="src" href="https://huggingface.co/spaces/Boyston/reachy_mini_language_tutor" target="_blank" rel="noopener">Boyston/reachy_mini_language_tutor ↗</a>
+  </div>
+</article><article class="card" data-cat="talk" data-likes="1">
+  <a class="thumb" href="https://huggingface.co/spaces/brucechou1983/reachy_mini_conversation_app_zh_tw" target="_blank" rel="noopener"><img src="img/app_brucechou1983__reachy_mini_conversation_app_zh_tw.jpg" alt="台湾中文儿童版对话" loading="lazy" data-zoom="1"><span class="likes">♥ 1</span></a>
+  <div class="body">
+    <div class="cardhead"><h3>台湾中文儿童版对话</h3><span class="cat">对话陪伴</span></div>
+    
+    <p class="desc">基于官方对话应用的繁中改写，专门为 4–7 岁小朋友设计：词汇更简单、语速更慢、回复更短，并强化鼓励式反馈。</p>
+    <div class="tags"><span class="tag">繁中本地化</span><span class="tag">儿童语料</span></div>
+    <a class="src" href="https://huggingface.co/spaces/brucechou1983/reachy_mini_conversation_app_zh_tw" target="_blank" rel="noopener">brucechou1983/reachy_mini_conversation_app_zh_tw ↗</a>
+  </div>
+</article><article class="card" data-cat="vision" data-likes="1">
+  <a class="thumb" href="https://huggingface.co/spaces/backtoengineering/reachy_mini_object_detector" target="_blank" rel="noopener"><img src="img/app_backtoengineering__reachy_mini_object_detector.jpg" alt="实时物体检测 + 头部跟踪" loading="lazy" data-zoom="1"><span class="likes">♥ 1</span></a>
+  <div class="body">
+    <div class="cardhead"><h3>实时物体检测 + 头部跟踪</h3><span class="cat">视觉专注</span></div>
+    
+    <p class="desc">极简的视觉示例：摄像头实时物体检测，检测框中心直接映射成头部目标位姿，实现“盯着目标看”的闭环。适合作为视觉项目的起手模板。</p>
+    <div class="tags"><span class="tag">目标检测</span><span class="tag">视觉伺服</span></div>
+    <a class="src" href="https://huggingface.co/spaces/backtoengineering/reachy_mini_object_detector" target="_blank" rel="noopener">backtoengineering/reachy_mini_object_detector ↗</a>
+  </div>
+</article><article class="card" data-cat="vision" data-likes="1">
+  <a class="thumb" href="https://huggingface.co/spaces/sidbha1980/reachy-mini-gestures" target="_blank" rel="noopener"><img src="img/app_sidbha1980__reachy-mini-gestures.jpg" alt="手势控制" loading="lazy" data-zoom="1"><span class="likes">♥ 1</span></a>
+  <div class="body">
+    <div class="cardhead"><h3>手势控制</h3><span class="cat">视觉专注</span></div>
+    
+    <p class="desc">用 MediaPipe 识别手部关键点，用手势直接驱动 Reachy：挥手、指向、抓握，全部转成头/天线/底座的组合动作。</p>
+    <div class="tags"><span class="tag">MediaPipe</span><span class="tag">手势识别</span></div>
+    <a class="src" href="https://huggingface.co/spaces/sidbha1980/reachy-mini-gestures" target="_blank" rel="noopener">sidbha1980/reachy-mini-gestures ↗</a>
+  </div>
+</article><article class="card" data-cat="edu" data-likes="1">
+  <a class="thumb" href="https://huggingface.co/spaces/danielritchie/anima_conversation_app" target="_blank" rel="noopener"><img src="img/app_danielritchie__anima_conversation_app.jpg" alt="Anima 情绪表达" loading="lazy" data-zoom="1"><span class="likes">♥ 1</span></a>
+  <div class="body">
+    <div class="cardhead"><h3>Anima 情绪表达</h3><span class="cat">教育游戏</span></div>
+    
+    <p class="desc">为对话应用加上一层“情绪表达”外壳：把回复内容映射到 Anima 的情绪标签，再驱动面部/身体姿态，让机器人表达更夸张。</p>
+    <div class="tags"><span class="tag">对话 fork</span><span class="tag">情绪引擎</span></div>
+    <a class="src" href="https://huggingface.co/spaces/danielritchie/anima_conversation_app" target="_blank" rel="noopener">danielritchie/anima_conversation_app ↗</a>
+  </div>
+</article><article class="card" data-cat="music" data-likes="1">
+  <a class="thumb" href="https://huggingface.co/spaces/signalnine/reachy_mini_dance_party_app" target="_blank" rel="noopener"><img src="img/app_signalnine__reachy_mini_dance_party_app.jpg" alt="YouTube 点歌派对" loading="lazy" data-zoom="1"><span class="likes">♥ 1</span></a>
+  <div class="body">
+    <div class="cardhead"><h3>YouTube 点歌派对</h3><span class="cat">音乐节奏</span></div>
+    
+    <p class="desc">语音点歌 + 自动跳舞：语音控制 YouTube 播放，机器人用头部与天线做 DJ 动作，客厅派对模式。</p>
+    <div class="tags"><span class="tag">语音控制</span><span class="tag">YouTube</span><span class="tag">律动生成</span></div>
+    <a class="src" href="https://huggingface.co/spaces/signalnine/reachy_mini_dance_party_app" target="_blank" rel="noopener">signalnine/reachy_mini_dance_party_app ↗</a>
+  </div>
+</article><article class="card" data-cat="music" data-likes="1">
+  <a class="thumb" href="https://huggingface.co/spaces/MCP-1st-Birthday/reachy-beat-bot" target="_blank" rel="noopener"><img src="img/app_MCP-1st-Birthday__reachy-beat-bot.jpg" alt="编舞生成器" loading="lazy" data-zoom="1"><span class="likes">♥ 1</span></a>
+  <div class="body">
+    <div class="cardhead"><h3>编舞生成器</h3><span class="cat">音乐节奏</span></div>
+    
+    <p class="desc">从一个主题词生成一段完整编舞：选音乐风格、生成动作序列、在机器人上回放，适合做 Demo 与派对。</p>
+    <div class="tags"><span class="tag">编舞生成</span><span class="tag">Gradio</span></div>
+    <a class="src" href="https://huggingface.co/spaces/MCP-1st-Birthday/reachy-beat-bot" target="_blank" rel="noopener">MCP-1st-Birthday/reachy-beat-bot ↗</a>
+  </div>
+</article><article class="card" data-cat="life" data-likes="1">
+  <a class="thumb" href="https://huggingface.co/spaces/Alanrenouf/reachy_mini_presenter" target="_blank" rel="noopener"><img src="img/app_Alanrenouf__reachy_mini_presenter.jpg" alt="自动讲 PPT" loading="lazy" data-zoom="1"><span class="likes">♥ 1</span></a>
+  <div class="body">
+    <div class="cardhead"><h3>自动讲 PPT</h3><span class="cat">生活助手</span></div>
+    
+    <p class="desc">把幻灯片交给机器人讲：Reachy 会配合页面切换做讲解动作与手势停顿，适合做技术分享的“助教”。</p>
+    <div class="tags"><span class="tag">演示自动化</span><span class="tag">动作配合</span></div>
+    <a class="src" href="https://huggingface.co/spaces/Alanrenouf/reachy_mini_presenter" target="_blank" rel="noopener">Alanrenouf/reachy_mini_presenter ↗</a>
+  </div>
+</article><article class="card" data-cat="life" data-likes="1">
+  <a class="thumb" href="https://huggingface.co/spaces/harshahemanth/reachy_mini_pocket" target="_blank" rel="noopener"><div class="noimg">🤖</div><span class="likes">♥ 1</span></a>
+  <div class="body">
+    <div class="cardhead"><h3>网页朗读 + 追问</h3><span class="cat">生活助手</span></div>
+    
+    <p class="desc">把一个 URL 丢给 Reachy，它会朗读内容并回答你的追问——把“稍后读”变成“听机器人讲给你听”。</p>
+    <div class="tags"><span class="tag">网页抓取</span><span class="tag">朗读</span><span class="tag">追问对话</span></div>
+    <a class="src" href="https://huggingface.co/spaces/harshahemanth/reachy_mini_pocket" target="_blank" rel="noopener">harshahemanth/reachy_mini_pocket ↗</a>
+  </div>
+</article><article class="card" data-cat="life" data-likes="1">
+  <a class="thumb" href="https://huggingface.co/spaces/catxiii/reachy_mini_storage_guardian" target="_blank" rel="noopener"><div class="noimg">🤖</div><span class="likes">♥ 1</span></a>
+  <div class="body">
+    <div class="cardhead"><h3>存储管家（中文）</h3><span class="cat">生活助手</span></div>
+    
+    <p class="desc">面向无线版存储焦虑的实用工具：分析磁盘占用、清理临时文件、管理大文件，避免 16GB eMMC 被应用缓存塞满。</p>
+    <div class="tags"><span class="tag">存储分析</span><span class="tag">清理</span><span class="tag">中文界面</span></div>
+    <a class="src" href="https://huggingface.co/spaces/catxiii/reachy_mini_storage_guardian" target="_blank" rel="noopener">catxiii/reachy_mini_storage_guardian ↗</a>
+  </div>
+</article><article class="card" data-cat="dev" data-likes="1">
+  <a class="thumb" href="https://huggingface.co/spaces/pollen-robotics/reachy-mini-weather-tool" target="_blank" rel="noopener"><img src="img/app_pollen-robotics__reachy-mini-weather-tool.jpg" alt="MCP 天气工具" loading="lazy" data-zoom="1"><span class="likes">♥ 1</span></a>
+  <div class="body">
+    <div class="cardhead"><h3>MCP 天气工具</h3><span class="cat">开发平台</span></div>
+    
+    <p class="desc">官方 MCP 工具 Space：让机器人能回答“今天要不要带伞”，并配合动作播报天气要点。</p>
+    <div class="tags"><span class="tag">MCP</span><span class="tag">天气</span></div>
+    <a class="src" href="https://huggingface.co/spaces/pollen-robotics/reachy-mini-weather-tool" target="_blank" rel="noopener">pollen-robotics/reachy-mini-weather-tool ↗</a>
+  </div>
+</article><article class="card" data-cat="dev" data-likes="1">
+  <a class="thumb" href="https://huggingface.co/spaces/pollen-robotics/reachy-mini-knowledge-tool" target="_blank" rel="noopener"><img src="img/app_pollen-robotics__reachy-mini-knowledge-tool.jpg" alt="MCP 知识工具" loading="lazy" data-zoom="1"><span class="likes">♥ 1</span></a>
+  <div class="body">
+    <div class="cardhead"><h3>MCP 知识工具</h3><span class="cat">开发平台</span></div>
+    
+    <p class="desc">官方 MCP 知识库：把 Reachy Mini、MicroDuck 与 Pollen 的实时信息做成可查询工具，机器人回答产品问题不再靠幻觉。</p>
+    <div class="tags"><span class="tag">MCP</span><span class="tag">实时知识库</span></div>
+    <a class="src" href="https://huggingface.co/spaces/pollen-robotics/reachy-mini-knowledge-tool" target="_blank" rel="noopener">pollen-robotics/reachy-mini-knowledge-tool ↗</a>
+  </div>
+</article><article class="card" data-cat="talk" data-likes="0">
+  <a class="thumb" href="https://huggingface.co/spaces/suhaas-teja/reachy_mini_conversation_app" target="_blank" rel="noopener"><div class="noimg">🤖</div><span class="likes">♥ 0</span></a>
+  <div class="body">
+    <div class="cardhead"><h3>“Hey Nora” 唤醒词版</h3><span class="cat">对话陪伴</span></div>
+    
+    <p class="desc">把唤醒词改成自定义的 “hey nora”，并附带 Jetson 上的 STT 部署分支，适合想换掉默认唤醒词的开发者。</p>
+    <div class="tags"><span class="tag">自定义唤醒词</span><span class="tag">Jetson STT</span></div>
+    <a class="src" href="https://huggingface.co/spaces/suhaas-teja/reachy_mini_conversation_app" target="_blank" rel="noopener">suhaas-teja/reachy_mini_conversation_app ↗</a>
+  </div>
+</article><article class="card" data-cat="dev" data-likes="0">
+  <a class="thumb" href="https://huggingface.co/spaces/pollen-robotics/reachy_mini_central" target="_blank" rel="noopener"><div class="noimg">🤖</div><span class="likes">♥ 0</span></a>
+  <div class="body">
+    <div class="cardhead"><h3>中央实时网关</h3><span class="cat">开发平台</span></div>
+    
+    <p class="desc">官方中央服务：为浏览器应用提供信令与身份验证，是 JS 应用通过 WebRTC 连到机器人的关键中间层。</p>
+    <div class="tags"><span class="tag">信令服务</span><span class="tag">OAuth</span><span class="tag">WebRTC</span></div>
+    <a class="src" href="https://huggingface.co/spaces/pollen-robotics/reachy_mini_central" target="_blank" rel="noopener">pollen-robotics/reachy_mini_central ↗</a>
+  </div>
+</article><article class="card" data-cat="dev" data-likes="0">
+  <a class="thumb" href="https://huggingface.co/spaces/pollen-robotics/reachy-mini-realtime-url" target="_blank" rel="noopener"><div class="noimg">🤖</div><span class="likes">♥ 0</span></a>
+  <div class="body">
+    <div class="cardhead"><h3>实时连接地址服务</h3><span class="cat">开发平台</span></div>
+    
+    <p class="desc">官方基础设施组件：为机器人生成/解析实时连接地址，配合中央网关完成端到端打通。</p>
+    <div class="tags"><span class="tag">基础设施</span><span class="tag">Docker</span></div>
+    <a class="src" href="https://huggingface.co/spaces/pollen-robotics/reachy-mini-realtime-url" target="_blank" rel="noopener">pollen-robotics/reachy-mini-realtime-url ↗</a>
+  </div>
+</article>
+    </div>
+    <p class="reveal" style="color:var(--tx3);font-size:13.5px;margin-top:18px">
+      想自己翻：<a href="https://huggingface.co/spaces?q=reachy+mini" target="_blank" rel="noopener">Hugging Face Spaces 搜索 “reachy mini”</a> ·
+      <a href="https://hf.co/reachy-mini/#/apps" target="_blank" rel="noopener">官方应用页</a> ·
+      <a href="https://huggingface.co/spaces/panny247/reachy-mini-leaderboard" target="_blank" rel="noopener">社区点赞排行榜</a> ·
+      <a href="https://huggingface.co/spaces/pollen-robotics/reachy-mini-social-wall" target="_blank" rel="noopener">社区动态墙</a>
+    </p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ================= 深度案例 ================= -->
+<section id="featured">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="num">03 / CASE STUDIES</div>
+      <h2>拆开看：三个项目的技术骨架</h2>
+      <p>光看简介不够。这一节把社区里最有代表性的三个项目拆到架构层，你能直接抄走它们的做法。</p>
+    </div>
+
+    <!-- 案例 1 -->
+    <div class="reveal" style="margin-bottom:46px">
+      <h3 style="font-size:23px;margin-bottom:6px">案例 A · Baby Reachy-Mini Companion：把 7 个模型塞进婴儿房</h3>
+      <p class="lead" style="max-width:78ch">179 个赞，作者 <code style="font-family:var(--mono);color:var(--mint)">ravediamond</code>。
+      目标很明确：<b>婴儿哭了，机器人自己去安抚，然后给家长发一张照片</b>。全程不联网、不调云 API、不依赖预写脚本——
+      而是让一个视觉语言模型看着画面自己决定“现在该做什么”，通过工具调用去执行。</p>
+      <div class="two" style="margin-top:18px">
+        <figure>
+          <img src="img/baby_hero.jpg" alt="Baby Reachy-Mini Companion 实拍" data-zoom="1">
+          <figcaption><b>实拍</b>：Reachy 站在婴儿房的书旁边。项目刻意强调“能负担得起”——一台 Mac + 一块约 700 美元的 NVIDIA Jetson Orin NX 就是全部算力。</figcaption>
+        </figure>
+        <figure>
+          <img src="img/baby_arch.svg" alt="Baby companion 架构图" style="background:#fff" data-zoom="1">
+          <figcaption><b>架构</b>：感知层（VAD / STT / 音频事件 / 目标检测）→ 推理层（VLM 工具调用）→ 行动层（语音、动作、Signal 推送）。</figcaption>
+        </figure>
+      </div>
+      <div class="tblwrap" style="margin-top:18px">
+        <table>
+          <thead><tr><th>模型</th><th>作用</th><th>跑在哪</th></tr></thead>
+          <tbody>
+            <tr><td>Silero VAD</td><td>判断“有没有人在说话”，省掉无意义的推理</td><td class="mono">Mac（PyTorch）</td></tr>
+            <tr><td>Faster-Whisper</td><td>语音转文字</td><td class="mono">Mac（ONNX）</td></tr>
+            <tr><td>Kokoro</td><td>文字转语音，负责“说话”</td><td class="mono">Mac（ONNX）</td></tr>
+            <tr><td>YAMNet</td><td>音频事件识别——核心就是分辨“婴儿哭声”</td><td class="mono">Mac（ONNX）</td></tr>
+            <tr><td>YOLOv26n</td><td>视觉目标检测，识别危险物与人</td><td class="mono">边缘设备</td></tr>
+            <tr><td>Ministral 3B / Qwen 3B</td><td>推理 + 工具调用（文本侧大脑）</td><td class="mono">Ollama（Mac）/ vLLM（Jetson）</td></tr>
+            <tr><td>Qwen3-VL 4B</td><td>看图回答“宝宝在做什么、有没有危险”</td><td class="mono">Ollama（Mac）/ vLLM（Jetson）</td></tr>
+            <tr><td>人脸跟踪</td><td>持续看向宝宝/家长，让互动有“注视感”</td><td class="mono">Mac</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="notice"><b>能抄走的三件事：</b>① 用 VAD + 音频事件检测做“廉价的前置过滤器”，别让大模型一直空转；
+      ② 决策交给 VLM 的 <b>工具调用</b>，而不是写一堆 <code>if</code>；③ 把“发照片给家长”这种闭环动作做进流程，
+      体验立刻从“玩具”变成“有用”。</div>
+      <div class="notice" style="border-left-color:var(--sky)"><b>最值得学的一个设计取舍：</b>作者在文档里坦言，小模型<b>无法可靠地串联 3 个以上的工具调用</b>，
+      所以“哭声告警”和“危险告警”这两条最关键的路径<b>绕过大模型，直接由代码确定性地发出</b>——大模型只负责“说什么”，
+      告警投递不交给概率。<b>把可靠性要求最高的环节从生成式链路里摘出来</b>，是这个项目最专业的一手。
+      <br>另外它用了 profile 机制：每个 profile 有独立的 system prompt、工具集与人格，所以作者说换场景（自闭症辅助、老人陪伴、宠物监控、家庭安防）“是改配置，不是做工程”。
+      实测端到端延迟：Mac 约 6 秒，Jetson Orin NX 约 3 秒。</div>
+    </div>
+
+    <!-- 案例 2 -->
+    <div class="reveal" style="margin-bottom:46px">
+      <h3 style="font-size:23px;margin-bottom:6px">案例 B · Reachy Phone Home：用 9 个自由度做行为干预</h3>
+      <p class="lead" style="max-width:78ch">367 个赞，全社区第一。逻辑极简但极有效：<b>摄像头 + YOLO 持续检测手机</b>。
+      你伸手拿手机，它就开始“看着你”、做小动作、说俏皮话。作者还配了一个浏览器控制台，桌上、手机上都能开关和调参数——
+      这个“应用自带 Web UI”的模式后来被大量社区应用照抄。</p>
+      <div class="two" style="margin-top:18px">
+        <figure>
+          <img src="img/phonehome.jpg" alt="Reachy Phone Home 界面" data-zoom="1">
+          <figcaption><b>应用自带 Web 控制台</b>：状态、设置、语音吐槽开关、调试视频流都在浏览器里。启动后监听 <code>8088</code> 端口，同网段手机也能开。</figcaption>
+        </figure>
+        <div>
+          <div class="flow">
+            <div class="node"><b>01 采集</b><span>Reachy Mini 摄像头取流（SDK 自动选择连接与媒体后端，Lite / Wireless 都能跑）</span></div>
+            <div class="arrow">↓</div>
+            <div class="node"><b>02 检测</b><span>YOLO26 检测手机与人（代码里写死 COCO 类别 <code>PHONE_CLASS_ID = 67</code>）；权重首次运行时自动下载</span></div>
+            <div class="arrow">↓</div>
+            <div class="node"><b>03 计时</b><span>累计手机出现时长，超过设定的“心跳”阈值就触发一次干预</span></div>
+            <div class="arrow">↓</div>
+            <div class="node"><b>04 转向</b><span><code>PhoneFollower</code> 用相机内参把检测框像素坐标换算成头部 look-at 姿态，并加 60px 防抖阈值——避免脑袋跟着检测抖动乱晃</span></div>
+            <div class="arrow">↓</div>
+            <div class="node"><b>05 表达</b><span>调官方舞蹈库 + 情绪库，按 5 组情境（环境音 / 夸你 / 查岗 / 不爽 / 难过）播放动作与本地语音；同时把状态推给 Web UI</span></div>
+          </div>
+          <div style="margin-top:14px">
+            <span class="pill">YOLO26</span><span class="pill">Ultralytics (AGPL-3.0)</span><span class="pill">Apache-2.0</span><span class="pill">port 8088</span>
+          </div>
+        </div>
+      </div>
+      <div class="notice"><b>能抄走的三件事：</b>① <code>--conf</code>、<code>--process-every</code> 这类参数暴露成命令行开关，
+      让用户自己平衡灵敏度与算力；② 检测不必每帧都跑，隔帧推理就能省一半算力；③ 视觉类应用强烈建议带一个 Web 控制台，
+      否则调试只能靠猜。</div>
+      <div class="notice" style="border-left-color:var(--coral)"><b>两个容易被忽略的工程点：</b>① <b>防抖</b>——检测框每帧都在跳，
+      直接用会让脑袋抽搐，所以加了 60px 阈值；② <b>协议要看清</b>——应用主体是 Apache-2.0，但它依赖的 Ultralytics YOLO 是 <b>AGPL-3.0</b>，
+      作者在 README 和 NOTICE 里都做了声明。想商用的话这一步不能省。</div>
+    </div>
+
+    <!-- 案例 3 -->
+    <div class="reveal">
+      <h3 style="font-size:23px;margin-bottom:6px">案例 C · Fast on-device AI reactions：把延迟压到 100 毫秒以内</h3>
+      <p class="lead" style="max-width:78ch">14 个赞但技术含量极高：作者（8bitkick）带着家人用一个假期做完，目标是
+      <b>全部推理跑在一颗树莓派 CPU 上，不外传任何数据</b>。它不做“完整对话”，只做“听到 → 转身 → 反应”，
+      非语言反应的延迟低于 100 毫秒。作者自己在文档里写得很清楚：想要云端大模型对话，请去用官方对话应用；
+      想要隐私、离线、极快，这就是答案。</p>
+      <div class="two" style="margin-top:18px">
+        <figure>
+          <img src="img/app_8bitkick__reachy_mini_reactions.jpg" alt="端侧反应应用" data-zoom="1">
+          <figcaption><b>端侧链路</b>：Silero 做语音活动检测 → Moonshine 做语音识别 → all-MiniLM-L6-v2 做句向量 →
+          语义检索匹配意图 → Supertonic 合成语音 / 直接做动作。</figcaption>
+        </figure>
+        <div>
+          <div class="spec-grid" style="grid-template-columns:1fr 1fr">
+            <div class="spec"><div class="k">硬件</div><div class="v">树莓派 5</div><div class="n">CPU 推理，不用 NPU/GPU</div></div>
+            <div class="spec"><div class="k">语音检测</div><div class="v">Silero</div><div class="n">决定“该不该醒”</div></div>
+            <div class="spec"><div class="k">语音识别</div><div class="v">Moonshine</div><div class="n">专为边缘设备设计的 STT</div></div>
+            <div class="spec"><div class="k">意图匹配</div><div class="v">MiniLM-L6</div><div class="n">句向量 + 语义检索</div></div>
+            <div class="spec"><div class="k">语音合成</div><div class="v">Supertonic</div><div class="n">轻量 TTS</div></div>
+            <div class="spec"><div class="k">唤醒→转头</div><div class="v">&lt; 100 <small>ms</small></div><div class="n">非语言反应，VAD 直接触发</div></div>
+            <div class="spec"><div class="k">语音识别</div><div class="v">200–500 <small>ms</small></div><div class="n">Moonshine ONNX</div></div>
+            <div class="spec"><div class="k">语义匹配</div><div class="v">50–150 <small>ms</small></div><div class="n">MiniLM 句向量 + 余弦相似度</div></div>
+            <div class="spec"><div class="k">语音合成</div><div class="v">0.5–2 <small>s</small></div><div class="n">Supertonic，命中缓存则更快</div></div>
+            <div class="spec"><div class="k">完整回路</div><div class="v">1–3 <small>s</small></div><div class="n">端到端；整机内存占用约 2GB</div></div>
+          </div>
+          <div class="notice" style="margin-top:14px"><b>这套思路的启发：</b>不是所有应用都需要大模型。
+          “快速转向说话的人”本身就是极强的生命感——而它只需要 VAD + 4 麦克风阵列的声源定位（DOA）就能做到。
+          作者自己也在 README 里写了：想看云端推理能做到什么，请用官方对话应用；想做隐私、离线、极快，就用这个。
+          <b>把“不调用 LLM”当成设计目标而不是妥协</b>，是它能压到 100 毫秒的根本原因。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ================= 代码项目 ================= -->
+<section id="repos">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="num">04 / CODE</div>
+      <h2>不在应用商店里，但更硬核的代码项目</h2>
+      <p>Space 上的应用是“装了就玩”，GitHub 上的这些项目则是去改它的身体、接它的大脑、把它变成别的东西。下表 14 个项目合计 2256 颗星标（抓取于 2026-09-18）。</p>
+    </div>
+    <div class="tblwrap reveal">
+      <table>
+        <thead><tr><th style="width:58px">★</th><th style="width:230px">项目</th><th>一句话</th><th style="width:112px">技术栈</th></tr></thead>
+        <tbody>
+          <tr><td class="mono">1508</td><td><a href="https://github.com/pollen-robotics/reachy_mini" target="_blank" rel="noopener">官方 SDK</a><div style="font-size:11.8px;color:var(--tx3);font-family:var(--mono)">pollen-robotics/reachy_mini</div></td><td>Python SDK + daemon + MuJoCo 仿真 + JS SDK。包含 9 自由度运动学、goto_target/set_target 两套运动哲学、录放动作、音频与摄像头抽象层。</td><td><span class="pill">Python / JS</span></td></tr><tr><td class="mono">310</td><td><a href="https://github.com/pollen-robotics/reachy_mini_conversation_app" target="_blank" rel="noopener">官方对话应用源码</a><div style="font-size:11.8px;color:var(--tx3);font-family:var(--mono)">pollen-robotics/reachy_mini_conversation_app</div></td><td>对话应用的完整实现：实时音频管线、LLM 工具调用、运动融合、可插拔 profile。</td><td><span class="pill">Python</span></td></tr><tr><td class="mono">122</td><td><a href="https://github.com/pollen-robotics/reachy-mini-desktop-app" target="_blank" rel="noopener">官方桌面应用</a><div style="font-size:11.8px;color:var(--tx3);font-family:var(--mono)">pollen-robotics/reachy-mini-desktop-app</div></td><td>跨平台桌面向导：设备管理、应用发现与安装、远程控制，把机器人当成一台“桌面外设”来管理。</td><td><span class="pill">Tauri/Web</span></td></tr><tr><td class="mono">68</td><td><a href="https://github.com/pollen-robotics/reachy-mini-motor-controller" target="_blank" rel="noopener">电机控制器固件</a><div style="font-size:11.8px;color:var(--tx3);font-family:var(--mono)">pollen-robotics/reachy-mini-motor-controller</div></td><td>底层 Dynamixel 通信与固件，负责 9 个电机的实时控制与安全限位。</td><td><span class="pill">C/C++</span></td></tr><tr><td class="mono">39</td><td><a href="https://github.com/tomrikert/clawbody" target="_blank" rel="noopener">给 AI 代理一具身体</a><div style="font-size:11.8px;color:var(--tx3);font-family:var(--mono)">tomrikert/clawbody</div></td><td>把 OpenClaw 代理（助手名叫 Clawson，一只太空龙虾）接到 Reachy Mini 上，三层架构：机器人 ↔ 实时语音层 ↔ OpenClaw 网关（浏览器、日历、智能家居、记忆、工具）。新增 25Hz 人脸追踪（MediaPipe/YOLO 可选），并且支持 MuJoCo 仿真——没有硬件也能玩。</td><td><span class="pill">Python</span></td></tr><tr><td class="mono">37</td><td><a href="https://github.com/suharvest/reachy-claw" target="_blank" rel="noopener">亚 200ms 语音助手（延迟冠军）</a><div style="font-size:11.8px;color:var(--tx3);font-family:var(--mono)">suharvest/reachy-claw</div></td><td>用 sherpa-onnx 把全链路本地化推到极限：Paraformer 流式识别 + Matcha-TTS/Vocos 合成，ASR+TTS 合计约 110ms，voice-to-voice 通常低于 1 秒（Qwen 3.5 2B）。视觉用 SCRFD+ArcFace+EfficientNet 走 TensorRT。还有 Monologue 模式：机器人对着看到的东西自言自语，适合展台。</td><td><span class="pill">Jetson / sherpa-onnx</span></td></tr><tr><td class="mono">35</td><td><a href="https://github.com/algoryn-nl/reachy-mini-esp32-eyes" target="_blank" rel="noopener">ESP32 可控眼睛（硬件改造）</a><div style="font-size:11.8px;color:var(--tx3);font-family:var(--mono)">algoryn-nl/reachy-mini-esp32-eyes</div></td><td>生态里最受欢迎的硬件改装：用 ESP32 驱动两颗 WS2812 做眼睛，提供 REST API 与 6 种内置动画（眨眼、吃惊、彩虹、愤怒脉冲……）。更关键的是作者把它定位成“模板”——ESP-IDF + REST + mDNS + Python 客户端 + 对话应用接入说明，是一套可复制的加外设方法论。</td><td><span class="pill">C / ESP-IDF</span></td></tr><tr><td class="mono">33</td><td><a href="https://github.com/NVIDIA-AI-IOT/reachy-mini-jetson-assistant" target="_blank" rel="noopener">NVIDIA 官方 · 全本地助手</a><div style="font-size:11.8px;color:var(--tx3);font-family:var(--mono)">NVIDIA-AI-IOT/reachy-mini-jetson-assistant</div></td><td>大厂下场做的参考实现：Gemma 4 E2B（视觉）+ Gemma 3 1B（文本）走 llama.cpp，faster-whisper 做识别，Kokoro ONNX 做合成，ChromaDB 做 RAG，全部在 Jetson Orin Nano 8GB 上端侧运行。工程严谨度全生态最高：SBOM、wheel 校验和、GPU 执行验证，且明确“不支持就报错，绝不静默降级到 CPU”。</td><td><span class="pill">Jetson / CUDA</span></td></tr><tr><td class="mono">32</td><td><a href="https://github.com/agentculture/reachy-mini-mcp" target="_blank" rel="noopener">MCP 控制服务（最早的之一）</a><div style="font-size:11.8px;color:var(--tx3);font-family:var(--mono)">agentculture/reachy-mini-mcp</div></td><td>让 Claude、Cursor 等 MCP 客户端直接控制机器人。设计上很克制：对外只暴露一个 operate_robot 元工具（避免几十个工具污染模型上下文），并支持一次调用执行多条指令的序列模式。附带一个 CLI 管理器，能安全地把配置合并进 Claude Code / Cursor 的 mcp.json。</td><td><span class="pill">MCP / Python</span></td></tr><tr><td class="mono">29</td><td><a href="https://github.com/V4C38/spectacles-reachy-mini" target="_blank" rel="noopener">Snap 眼镜 AR 遥控</a><div style="font-size:11.8px;color:var(--tx3);font-family:var(--mono)">V4C38/spectacles-reachy-mini</div></td><td>用 Snap Spectacles 控制 Reachy：Puppeteer 模式给你一个可抓的物体，机器人始终看向它；Assistant 模式让 ChatGPT 借用眼镜的摄像头与空间数据指挥机器人（“我左边那个东西是什么”“转过身去”）。全部逻辑写在 Lens Studio 里，配仿真模式——没有实体机器人也能开发。</td><td><span class="pill">TypeScript / Lens Studio</span></td></tr><tr><td class="mono">17</td><td><a href="https://github.com/pollen-robotics/reachy_mini_dances_library" target="_blank" rel="noopener">官方舞蹈库</a><div style="font-size:11.8px;color:var(--tx3);font-family:var(--mono)">pollen-robotics/reachy_mini_dances_library</div></td><td>官方录制动作库：20 个锁定 BPM 的舞蹈编舞，加上独立的情绪库数据集。所有编舞类应用的数据基础——想抄动作，先来这里。</td><td><span class="pill">动作数据</span></td></tr><tr><td class="mono">9</td><td><a href="https://github.com/Gaurav-Gosain/small-talk" target="_blank" rel="noopener">机器人主持的 AI 播客</a><div style="font-size:11.8px;color:var(--tx3);font-family:var(--mono)">Gaurav-Gosain/small-talk</div></td><td>两台 Reachy 主持的 AI 对 AI 播客：给个话题，它们自己写脚本、设计声音、开播。聪明之处在于——3D 数字孪生可以有无数个，实体机器人只有一个，所以“实体 Reachy 作为演员加入虚拟节目”天然解决了多人播客只有一个机器人的问题。HF Space 上的点赞（141）远高于 GitHub 星标，说明传播发生在 HF 社区。</td><td><span class="pill">三.js / LiveKit</span></td></tr><tr><td class="mono">9</td><td><a href="https://github.com/jjmartres/reachy-mini-sdk-skill" target="_blank" rel="noopener">Claude Skill 开发包</a><div style="font-size:11.8px;color:var(--tx3);font-family:var(--mono)">jjmartres/reachy-mini-sdk-skill</div></td><td>把 Reachy Mini SDK 与 REST API 打包成可复用的 Claude Skill，让 AI 代理按规范生成正确代码，而不是靠猜 API。</td><td><span class="pill">Agent Skill</span></td></tr><tr><td class="mono">8</td><td><a href="https://github.com/iizukak/reachy_mini_turbowarp" target="_blank" rel="noopener">Scratch 积木编程</a><div style="font-size:11.8px;color:var(--tx3);font-family:var(--mono)">iizukak/reachy_mini_turbowarp</div></td><td>为 TurboWarp / Scratch 3.0 写的自定义扩展，提供 19 个积木块（命令 / 报告器 / 布尔），孩子拖积木就能驱动真机器人。走的是“接进已有教育生态”而不是自造编辑器的聪明路径；支持英语、日语、法语。</td><td><span class="pill">TypeScript / Scratch</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="two reveal" style="margin-top:22px">
+      <figure>
+        <img src="img/disco.jpg" alt="3D 网页可视化" data-zoom="1">
+        <figcaption><b>3D Web Visualizer</b>：浏览器里实时显示机器人姿态。这类“数字孪生”工具在调试动作时几乎是必需品——不用一直盯着实体机器人。</figcaption>
+      </figure>
+      <figure>
+        <img src="img/receptionist.jpg" alt="AI 前台接待应用界面" data-zoom="1">
+        <figcaption><b>AI Receptionist</b>：把对话应用改造成前台场景，带实时标注的摄像头画面、访客名单、日历与邮件外发。这类“垂直场景改造”是社区最主流也最容易出彩的玩法。</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ================= 动手开发 ================= -->
+<section id="build">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="num">05 / BUILD</div>
+      <h2>动手：三条开发路线，从最简单开始</h2>
+      <p>官方把开发门槛压得很低。三条路线按难度排：<b>写个网页应用</b>（推荐新手）→ <b>写个 Python 应用</b>（真·机器人控制）→
+      <b>让 AI 代理帮你写</b>（2026 年最主流的方式）。</p>
+    </div>
+
+    <div class="reveal">
+      <div class="tabs" id="tabs">
+        <button class="on" data-t="t1">① Python 最小应用</button>
+        <button data-t="t2">② 浏览器 JS 应用（推荐）</button>
+        <button data-t="t3">③ 用 AI 代理开发</button>
+        <button data-t="t4">④ 常用动作 API</button>
+      </div>
+
+      <div class="tabpane on" id="t1">
+        <p class="lead">安装 SDK 后（<code style="font-family:var(--mono);color:var(--mint)">uv pip install reachy-mini</code>，官方建议装 <code style="font-family:var(--mono);color:var(--mint)">uv</code> 以获得 10–100× 的安装速度），连上机器人就能动起来。最小例子：</p>
+        <div class="codewrap"><button class="copybtn">复制</button><pre><code>from reachy_mini import ReachyMini
+from reachy_mini.utils import create_head_pose
+
+with ReachyMini() as mini:
+    # 抬头 10mm 并侧倾 15°，耗时 1 秒
+    mini.goto_target(
+        head=create_head_pose(z=10, roll=15, degrees=True, mm=True),
+        duration=1.0
+    )</code></pre></div>
+        <p class="lead">如果你要发布成“应用商店里能装的应用”，需要实现官方约定的 <code style="font-family:var(--mono);color:var(--mint)">ReachyMiniApp</code> 契约——只需实现一个 <code style="font-family:var(--mono);color:var(--mint)">run()</code>：</p>
+        <div class="codewrap"><button class="copybtn">复制</button><pre><code>import threading, time
+import numpy as np
+from reachy_mini import ReachyMini, ReachyMiniApp
+from reachy_mini.utils import create_head_pose
+
+
+class MyApp(ReachyMiniApp):
+    def run(self, reachy_mini: ReachyMini, stop_event: threading.Event):
+        t0 = time.time()
+        while not stop_event.is_set():
+            t = time.time() - t0
+            # 脑袋做 0.2Hz 正弦摆动
+            head_pose = create_head_pose(yaw=30.0 * np.sin(2 * np.pi * 0.2 * t), degrees=True)
+            # 两根天线反向摆，0.5Hz
+            a = np.deg2rad(25.0 * np.sin(2 * np.pi * 0.5 * t))
+            reachy_mini.set_target(head=head_pose, antennas=np.array([a, -a]))
+            time.sleep(0.02)          # 50Hz 控制环
+
+
+if __name__ == "__main__":
+    app = MyApp()
+    try:
+        app.wrapped_run()
+    except KeyboardInterrupt:
+        app.stop()</code></pre></div>
+        <div class="notice"><b>关键约束：</b>同一时间<b>只能运行一个应用</b>；应用运行在 daemon 的子进程里，不自己管硬件连接；
+        无线版上应用跑在共享虚拟环境 <code>/venvs/apps_venv/</code>；停止时 daemon 会发 <code>SIGINT</code>，所以要在循环里轮询 <code>stop_event</code> 优雅退出。
+        应用退出后机器人会回到默认姿态。</div>
+      </div>
+
+      <div class="tabpane" id="t2">
+        <p class="lead">官方明确推荐新应用走这条路：<b>一个静态网页，通过 WebRTC 直接驱动机器人</b>。使用者零安装——点开链接就能用。</p>
+        <div class="flow" style="margin:16px 0">
+          <div class="node"><b>浏览器</b><span>你的应用 + <code style="font-family:var(--mono)">reachy-mini-sdk.js</code></span></div>
+          <div class="arrow">↓ SSE / HTTP 信令 &nbsp;&nbsp;|&nbsp;&nbsp; ↑ WebRTC 点对点（视频 + 音频 + 数据）</div>
+          <div class="node"><b>信令服务</b><span>部署在 HF Space 上，负责转发 SDP / ICE 并校验 Hugging Face OAuth Token</span></div>
+          <div class="arrow">↓</div>
+          <div class="node"><b>机器人</b><span>GStreamer WebRTC daemon：摄像头 · 麦克风 · 电机</span></div>
+        </div>
+        <div class="codewrap"><button class="copybtn">复制</button><pre><code>npm install @pollen-robotics/reachy-mini-sdk
+# 官方要求：把版本号"钉死"（pin）成一个确定版本，不要用 ^ 或 latest
+# 原因：宿主外壳、SDK 与 daemon 之间走的是带版本协商的 WebRTC 协议，
+#      版本漂移会导致连不上。官方文档当前示例钉的是 1.8.0，npm 上已有更新版本。</code></pre></div>
+        <p class="lead">SDK 给出一个状态机，用起来很直白：</p>
+        <div class="codewrap"><button class="copybtn">复制</button><pre><code>'disconnected' ──connect()──▸ 'connected' ──startSession()──▸ 'streaming'
+     ▴ disconnect()                ▴ stopSession()
+     └─────────────────────────────┘
+
+// autoConnect() 会把 授权 → connect() → 选机器人 → startSession() → ensureAwake()
+// 整条链路一次跑完，返回 { robotId, robotName, isEmbedded }</code></pre></div>
+        <div class="notice"><b>为什么推荐这条路：</b>① 零安装、可分享、可嵌入；② 视频/音频走 WebRTC 点对点，信令服务器不在数据路径上，延迟低；
+        ③ 官方提供了宿主外壳 <code>mountHost()</code> / <code>connectToHost()</code>，把授权、选机器人、唤醒全包了。
+        想读懂底层，可以先看社区那个 <b>单文件 WebRTC 示例</b>（cduss/webrtc_example）。</div>
+      </div>
+
+      <div class="tabpane" id="t3">
+        <p class="lead">官方仓库里直接内置了给 AI 代理看的 <code style="font-family:var(--mono);color:var(--mint)">AGENTS.md</code> 和 <code style="font-family:var(--mono);color:var(--mint)">skills/</code> 目录。
+        你只要对 Claude Code / Codex / Copilot 说这句话：</p>
+        <div class="codewrap"><button class="copybtn">复制</button><pre><code>我想做一个 Reachy Mini 应用。
+请先读 https://github.com/pollen-robotics/reachy_mini/blob/main/AGENTS.md</code></pre></div>
+        <p class="lead">仓库里给代理准备的技能文档：</p>
+        <div class="tblwrap">
+          <table>
+            <thead><tr><th style="width:210px">Skill</th><th>教代理什么</th></tr></thead>
+            <tbody>
+              <tr><td class="mono">create-app.md</td><td>应用创建流程与模板</td></tr>
+              <tr><td class="mono">ai-integration.md</td><td>怎么接 LLM、怎么做语音</td></tr>
+              <tr><td class="mono">control-loops.md</td><td>实时反应型应用（跟踪、游戏）怎么写控制环</td></tr>
+              <tr><td class="mono">motion-philosophy.md</td><td><code>goto_target</code> 与 <code>set_target</code> 该怎么选</td></tr>
+              <tr><td class="mono">interaction-patterns.md</td><td>把天线当按钮、把脑袋当控制器的交互范式</td></tr>
+              <tr><td class="mono">symbolic-motion.md</td><td>用数学方式定义动作（舞蹈、节奏）</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="notice"><b>务必用 CLI 创建工程，不要手搓目录：</b>
+        <code>reachy-mini-app-assistant create my_app /path --publish</code> —— 它会自动处理样板代码、HF 标签、入口点和包结构。
+        手动建目录会产生很难排查的隐性错误。想更快出成果，用对话模板：
+        <code>reachy-mini-app-assistant create --template conversation my_app .</code>（自带音频管线、LLM 工具与动作融合）。</div>
+      </div>
+
+      <div class="tabpane" id="t4">
+        <p class="lead">两套运动哲学，决定了动作的手感：</p>
+        <div class="two" style="gap:16px">
+          <div class="spec"><div class="k">goto_target()</div><div class="v" style="font-size:16px">带时长的目标运动</div>
+            <div class="n">给定目标位姿和 <code>duration</code>，SDK 负责插值。适合“做一个动作”“摆个姿势”“跳一段舞”。动作平滑、可预期。</div></div>
+          <div class="spec"><div class="k">set_target()</div><div class="v" style="font-size:16px">即时目标 + 控制环</div>
+            <div class="n">直接设目标，自己按固定频率（如 50Hz）刷。适合跟踪类、游戏类、需要毫秒级反应的应用。</div></div>
+        </div>
+        <div class="codewrap"><button class="copybtn">复制</button><pre><code>from reachy_mini import ReachyMini
+from reachy_mini.utils import create_head_pose
+
+with ReachyMini() as mini:
+    # 用头部"看"某个点（自动算 yaw/pitch）
+    mini.goto_target(head=create_head_pose(x=0.1, y=0.2, z=0.05, mm=True), duration=1.2)
+
+    # 天线当表情：竖起 / 后压 / 抖一抖
+    mini.goto_target(antennas=[0.6, 0.6], duration=0.3)
+
+    # 回零 + 睡眠姿势
+    mini.goto_target(head=create_head_pose(), antennas=[0, 0], duration=0.5)</code></pre></div>
+        <div class="codewrap"><button class="copybtn">复制</button><pre><code>import numpy as np
+from reachy_mini.utils import create_head_pose
+
+# create_head_pose(x, y, z, roll, pitch, yaw, mm=False, degrees=True) -> 4x4 变换矩阵
+mini.goto_target(
+    head=create_head_pose(z=10, mm=True),
+    antennas=np.deg2rad([45, 45]),      # 天线抬起 45°
+    body_yaw=np.deg2rad(30),            # 底座转 30°
+    duration=2.0,
+    method="minjerk",                   # 可选 linear / minjerk(默认) / ease_in_out / cartoon
+)
+
+# 录制自己的动作，之后可以像官方动作库一样回放
+mini.start_recording()
+...   # 手动带着它做动作，或程序驱动
+move = mini.stop_recording()
+mini.play_move(move, initial_goto_duration=1.0)</code></pre></div>
+        <div class="codewrap"><button class="copybtn">复制</button><pre><code># 仿真：没有硬件也能开发（MuJoCo）
+pip install "reachy-mini[mujoco]"
+mjpython -m reachy_mini.daemon.app.main --sim      # macOS
+# 仿真会像一台 USB 连接的 Lite 一样工作；但没有 XMOS 硬件回声消除
+# 官方动作库：20 个舞蹈（锁定 BPM 的 JSON 编舞）+ 情绪库（独立数据集）</code></pre></div>
+        <div class="notice"><b>官方还提供了录放与舞蹈库：</b><code>reachy_mini_dances_library</code> 里有官方录制的舞蹈与情绪动作；
+        社区动作库已经有 <b>407 个动作、52 个数据集</b>打上了 <code>reachy_mini_community_moves</code> 标签——
+        想抄动作，先去 <b>Reachy Mini Move Previews</b> 画廊里挑。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ================= 平台机制 ================= -->
+<section id="stack">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="num">06 / HOW IT WORKS</div>
+      <h2>应用是怎么被“一键安装”到机器人上的</h2>
+      <p>理解这套机制，你才知道为什么 Reachy Mini 能在不到一年里长出 547 个打标 Space、455 个可安装应用。</p>
+    </div>
+    <div class="two reveal">
+      <div>
+        <div class="flow">
+          <div class="node"><b>① 发布</b><span>开发者把应用推到 Hugging Face Space，README 的 frontmatter 里打上 <code style="font-family:var(--mono)">reachy_mini_python_app</code> 或 <code style="font-family:var(--mono)">reachy_mini_js_app</code> 标签</span></div>
+          <div class="arrow">↓</div>
+          <div class="node"><b>② 发现</b><span>机器人的控制面板列出所有带标签的 Space，附带图标、简介与 Install 按钮</span></div>
+          <div class="arrow">↓</div>
+          <div class="node"><b>③ 安装</b><span>点 Install，daemon 把应用拉取并装进机器人上的共享虚拟环境 <code style="font-family:var(--mono)">/venvs/apps_venv/</code>（无线版）</span></div>
+          <div class="arrow">↓</div>
+          <div class="node"><b>④ 启动</b><span>daemon 以 Python 子进程方式启动：<code style="font-family:var(--mono)">python -u -m your_app.main</code>，并把已连接好的 <code style="font-family:var(--mono)">ReachyMini</code> 实例与 <code style="font-family:var(--mono)">stop_event</code> 交给你的 <code>run()</code></span></div>
+          <div class="arrow">↓</div>
+          <div class="node"><b>⑤ 停止</b><span>发 <code style="font-family:var(--mono)">SIGINT</code> 触发优雅退出，随后机器人回到默认姿态</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="spec-grid" style="grid-template-columns:1fr">
+          <div class="spec"><div class="k">Python 应用</div><div class="v" style="font-size:15.5px">跑在机器人 / 电脑的 daemon 里</div>
+            <div class="n">拿到已连接的 <code>ReachyMini</code> 对象，能直接操作电机、音频、摄像头。适合控制环、音频管线、本地模型。</div></div>
+          <div class="spec"><div class="k">JS / 静态应用</div><div class="v" style="font-size:15.5px">跑在浏览器，通过 WebRTC 连机器人</div>
+            <div class="n">零安装、可分享链接、可嵌入。适合遥操作、可视化、轻交互与演示。</div></div>
+          <div class="spec"><div class="k">MCP 工具应用</div><div class="v" style="font-size:15.5px">给对话机器人的“外挂能力”</div>
+            <div class="n">官方已有搜索、天气、知识三类工具 Space。挂上去，机器人就能联网查资料。</div></div>
+          <div class="spec"><div class="k">应用助手 CLI</div><div class="v" style="font-size:15.5px">reachy-mini-app-assistant</div>
+            <div class="n"><code>create</code> 生成工程、<code>install</code> 装到机器人、<code>--publish</code> 一键发布到 Hugging Face。</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="reveal" style="margin-top:24px">
+      <div class="spec-grid">
+        <div class="spec"><div class="k">官方出品 Space</div><div class="v">51</div><div class="n">Pollen Robotics 账号下共 51 个 Space（含装配指南、应用与工具）</div></div>
+        <div class="spec"><div class="k">打标 Space 总数</div><div class="v">547</div><div class="n">带 <code>reachy_mini</code> 标签的 Hugging Face Space（2026-09 经 Hub API 统计）</div></div>
+        <div class="spec"><div class="k">其中 Python 应用</div><div class="v">455</div><div class="n">标签 <code>reachy_mini_python_app</code>——真正跑在机器人/电脑上的应用</div></div>
+        <div class="spec"><div class="k">其中浏览器应用</div><div class="v">75</div><div class="n">标签 <code>reachy_mini_js_app</code>——WebRTC 驱动的网页应用，官方推荐路线</div></div>
+        <div class="spec"><div class="k">社区动作数据集</div><div class="v">54</div><div class="n">带 <code>reachy_mini_community_moves</code> 标签的数据集，合计约 407 个动作</div></div>
+        <div class="spec"><div class="k">官方 SDK 版本节奏</div><div class="v">67</div><div class="n">GitHub Release 数量（v1.0.0rc1 → v1.11.0，不到一年）</div></div>
+        <div class="spec"><div class="k">SDK 星标</div><div class="v">1508</div><div class="n">pollen-robotics/reachy_mini（Apache-2.0；硬件文件另有 CC BY-SA-NC）</div></div>
+      </div>
+      <div class="notice"><b>读数字要注意口径：</b>本图鉴收录的 74 个应用是从 Spaces 搜索与标签结果里<b>人工筛选</b>出的代表作，不是全量清单。
+      带 <code>reachy_mini</code> 标签的 Space 有 547 个，其中不少是实验、分支、个人学习项目，点赞数为 0；而点赞数最高的两个（367、207）都来自个人开发者而非官方——这正是这个生态最健康的地方。</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ================= 学习路径 ================= -->
+<section id="path">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="num">07 / ROADMAP</div>
+      <h2>刚组装完？按这张表一步步来</h2>
+      <p>不用一上来就写代码。先把它用起来，再改它，最后造新的。</p>
+    </div>
+    <div class="paths reveal">
+      <div class="path">
+        <h3>第 1 天 · 让它活过来</h3>
+        <div class="who">零代码</div>
+        <ol>
+          <li>装配完成后先跑官方的<b>装配指南 Space</b>，逐项核对（电机是否全部识别、天线是否装反）。</li>
+          <li>打开控制面板，用 <b>Move Player</b> 播放 <code style="font-family:var(--mono)">stumble_and_recover</code> 之类的预录动作，确认 9 个电机都正常。</li>
+          <li>装第一个应用：<b>官方对话应用</b>——这是最能体现“它活着”的一步。</li>
+          <li>再装 <b>天线报时时钟</b> 或 <b>官方电台</b>，放在桌上陪你。</li>
+        </ol>
+      </div>
+      <div class="path">
+        <h3>第 1 周 · 玩遍社区</h3>
+        <div class="who">零代码 + 调参</div>
+        <ol>
+          <li>装 <b>Phone Home</b>（行为干预）、<b>F1 解说员</b>（内容生成 + 语音 + 动作同步）、<b>Home Assistant 集成</b>（接全屋设备）。</li>
+          <li>用 <b>Reachy Mini Testbench</b> 看控制环频率与 9 个电机状态，学会判断“正常”长什么样。</li>
+          <li>在 <b>Reachy Mini Remix</b> 里用积木块编一段舞，理解动作是怎么被拼起来的。</li>
+          <li>翻 <b>Move Previews 画廊</b>，把喜欢的社区动作收藏下来。</li>
+        </ol>
+      </div>
+      <div class="path">
+        <h3>第 2 周 · 写第一个应用</h3>
+        <div class="who">需要写代码</div>
+        <ol>
+          <li>装 SDK，跑通“抬头 + 摆天线”的最小例子，再跑 MuJoCo 仿真版。</li>
+          <li>用 <code style="font-family:var(--mono)">reachy-mini-app-assistant create</code> 生成工程骨架。</li>
+          <li>挑一个<b>最简单但完整</b>的社区应用读源码——推荐 <b>Simple Control Panel</b>（纯前端）或 <b>Metronome</b>（音频 + 动作）。</li>
+          <li>做一个“只有你能用”的小东西：比如抬眼提醒喝水、来邮件时天线抖一下。</li>
+        </ol>
+      </div>
+      <div class="path">
+        <h3>第 1 个月 · 做点别人也能用的</h3>
+        <div class="who">进阶</div>
+        <ol>
+          <li>接一个 LLM/MCP：从官方 MCP 工具（搜索 / 天气 / 知识）开始挂，而不是自己造工具层。</li>
+          <li>把应用发布到 Hugging Face Space，打上标签，让全世界一键安装。</li>
+          <li>想本地化：参考 <b>端侧极速反应</b>（纯树莓派）或 <b>Baby 陪伴</b>（Jetson + 7 模型）。</li>
+          <li>想改硬件：<b>ESP32 可控眼睛</b>、<b>3D 打印皮肤库</b>、<b>Snap 眼镜 AR 遥控</b>都在等你。</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<div class="divider"></div>
+
+<!-- ================= 中国区实战 ================= -->
+<section id="china">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="num">08 / CHINA</div>
+      <h2>中国区实战：先解决网络，再谈玩法</h2>
+      <p>这一节的每一条都出自官方 Troubleshooting / FAQ 文档，不是猜测。如果你刚组装完发现“应用商店打不开”“对话应用没反应”，八成不是硬件问题。</p>
+    </div>
+
+    <div class="two reveal">
+      <div>
+        <div class="spec-grid" style="grid-template-columns:1fr">
+          <div class="spec" style="border-left:3px solid var(--coral)">
+            <div class="k">症状 1 · 应用商店列表转圈 / 装不上</div>
+            <div class="v" style="font-size:15.5px">换 Hugging Face 镜像端点</div>
+            <div class="n">官方在 FAQ 里直接给出了镜像方案：把 <code>HF_ENDPOINT</code> 指向 <code>https://hf-mirror.com/</code>。原话还提醒「你可能还需要给 PyPI、GitHub 也配镜像」。<br>
+            <code>export HF_ENDPOINT=https://hf-mirror.com/</code></div>
+          </div>
+          <div class="spec" style="border-left:3px solid var(--coral)">
+            <div class="k">症状 2 · 对话应用连不上 / 一直不说话</div>
+            <div class="v" style="font-size:15.5px">实时语音接口在墙外</div>
+            <div class="n">官方明确写了：对话应用依赖 OpenAI 的实时语音 API，<b>在中国大陆可能无法访问</b>。官方给出的最优解是在机器上做 VPN/代理，并推荐<b>按域名分流</b>而不是全局代理——只把 <code>huggingface.co</code> 与 <code>api.openai.com</code> 走代理。</div>
+          </div>
+          <div class="spec" style="border-left:3px solid var(--mint)">
+            <div class="k">症状 3 · 开了代理之后，机器人反而找不到了</div>
+            <div class="v" style="font-size:15.5px">把内网与 mDNS 排除掉</div>
+            <div class="n">官方专门提醒：走代理时要把本地网段排除，否则 <code>reachy-mini.local</code> 会失联。需要放行的至少包括 <code>192.168.0.0/16</code>、<code>127.0.0.1</code>，以及端口 <b>22（SSH）</b>、<b>8000（daemon）</b>、<b>5353 TCP/UDP（mDNS 本地发现）</b>。</div>
+          </div>
+          <div class="spec" style="border-left:3px solid var(--mint)">
+            <div class="k">症状 4 · 无线版在机器人上改了环境变量却不生效</div>
+            <div class="v" style="font-size:15.5px">要给 daemon 服务本身加</div>
+            <div class="n">SDK 支持标准的 <code>HTTP_PROXY</code> / <code>HTTPS_PROXY</code> / <code>NO_PROXY</code>，<b>覆盖所有出网 HTTPS 请求</b>（HF 登录、应用列表、应用安装更新、WebRTC 信令）。但在无线版上必须让 <b>daemon 服务</b>看到这些变量：<code>sudo systemctl edit reachy-mini-daemon</code>，在 <code>[Service]</code> 段里加，然后重启服务。</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="codewrap"><button class="copybtn">复制</button><pre><code># ① 镜像：解决应用商店与模型下载慢
+export HF_ENDPOINT=https://hf-mirror.com/
+
+# ② 代理：只在需要时给需要的域名
+export HTTPS_PROXY=http://127.0.0.1:7890
+export HTTP_PROXY=http://127.0.0.1:7890
+export NO_PROXY=localhost,127.0.0.1,192.168.0.0/16,reachy-mini.local
+
+# ③ 无线版：让 daemon 服务也能看到（否则只有你的 shell 生效）
+sudo systemctl edit reachy-mini-daemon
+#   [Service]
+#   Environment="HF_ENDPOINT=https://hf-mirror.com/"
+#   Environment="HTTPS_PROXY=http://192.168.1.10:7890"
+#   Environment="NO_PROXY=localhost,127.0.0.1,192.168.0.0/16,reachy-mini.local"
+sudo systemctl restart reachy-mini-daemon
+
+# ④ 验证还活着
+ping reachy-mini.local
+curl -s localhost:8000/api/daemon/status</code></pre></div>
+        <div class="notice"><b>代理分流的最小规则集：</b>只代理 <code>huggingface.co</code> 与 <code>api.openai.com</code>；放行本地网段、22、8000、5353。
+        这样机器人既上得了网，又不会被代理“藏”起来——这是官方 FAQ 里推荐的做法。</div>
+        <div class="notice" style="border-left-color:var(--mint)"><b>好消息：</b>官方在 FAQ 结尾写了一句「基于开放权重模型的方案正在路上」。
+        对国内用户来说，这意味着<b>不依赖境外实时语音 API</b> 的本地对话方案是官方明确的方向——而社区其实已经先跑出来了：
+        <b>端侧极速反应</b>（纯树莓派 CPU）、<b>Baby 陪伴</b>（Jetson 7 模型全本地）、<b>NVIDIA Jetson 助手</b>，都不需要连境外服务。
+        更关键的是，Hackaday 在 2026 年 6 月报道过社区跑通的全本地对话链路，其中 LLM 用的是 <b>Qwen3-4B-Instruct</b>——
+        这意味着让 Reachy 用中文跟你对话、且完全离线，已经有现成可走的路。</div>
+      </div>
+    </div>
+
+    <div class="reveal" style="margin-top:26px">
+      <h3 style="font-size:19px;margin-bottom:6px">怎么买到、以及它其实是中国制造</h3>
+      <div class="paths" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
+        <div class="path">
+          <h3 style="font-size:16px">官方渠道</h3>
+          <div class="who">欧洲 / 英国 / 美国 / 加拿大</div>
+          <ol>
+            <li>Pollen Robotics 官方商店仅向 EU/UK 与 US/Canada 发货。</li>
+            <li>其他地区（含中国大陆）会被引导到 <b>Seeed Studio</b>——官方指定的分销商。</li>
+            <li>第三方渠道（Seeed / AliExpress）价格通常高于官方定价。</li>
+          </ol>
+        </div>
+        <div class="path">
+          <h3 style="font-size:16px">一个有意思的事实</h3>
+          <div class="who">设计在波尔多，制造在中国</div>
+          <ol>
+            <li>产品资料标注的原产国是 <b>China</b>，设计地在法国波尔多。</li>
+            <li>Seeed Studio 总部在深圳，并维护了<b>中文版 wiki</b>（装配、SDK、发布应用都有中文页）。</li>
+            <li>所以国内买到的机器，本质上是从深圳发出去又绕回来的。</li>
+          </ol>
+        </div>
+        <div class="path">
+          <h3 style="font-size:16px">中文资料</h3>
+          <div class="who">想读中文文档</div>
+          <ol>
+            <li>Seeed 中文 wiki：装配指南、SDK 上手、应用发布流程。</li>
+            <li>国内科技媒体在 2025-07 首发时有过报道，但普遍<b>照抄了外媒的两处错误</b>（见下方勘误）。</li>
+            <li>官方文档本身没有中文版，建议对着本文 + 官方英文文档看。</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <div class="notice reveal" style="border-left-color:var(--coral);margin-top:24px">
+      <b>⚠️ 中文报道里最常见的三处错误（别被带偏）</b>
+      <ol style="margin:10px 0 0;padding-left:20px">
+        <li><b>“有两块屏幕当眼睛”</b>——错的。官方硬件数据手册的元件清单里<b>没有任何显示屏</b>。仓库里那两个 eye 部件是<b>机械眼罩/外壳</b>（STL），其中一个用来固定摄像头；整机唯一的灯光输出是状态指示灯（低电量时绿→橙→红）。
+        有屏幕眼睛的是 2025 年 5 月亮相的<b>原型机</b>，不是量产版。</li>
+        <li><b>“无线版用的是树莓派 5”</b>——错的，是 <b>Raspberry Pi CM4</b>（模块型号 CM4104016，Wi-Fi / 4GB RAM / 16GB 存储）。官方博客在 2025-10-22 专门改了这处措辞。</li>
+        <li><b>“底座能 360° 旋转”</b>——不准确。数据手册标的是 <b>±155°</b>，SDK 安全限位表里是 <b>±160°</b>，总之不是整圈。</li>
+      </ol>
+      <div style="margin-top:10px">另外提醒：<b>官方从未公布续航小时数</b>，网上任何具体续航数字都没有依据；软件也读不到电量，只能看指示灯。</div>
+    </div>
+  </div>
+</section>
+
+
+<div class="divider"></div>
+
+<!-- ================= 媒体评价 ================= -->
+<section id="press">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="num">09 / PRESS</div>
+      <h2>外界怎么看它：报道里的亮点与争议</h2>
+      <p>以下链接均已核实可访问。注意媒体报道也会出错——《The Verge》在同一句话里既说了正确价格，也重复了“树莓派 5”这个错误。</p>
+    </div>
+
+    <div class="paths reveal">
+      <div class="path">
+        <h3 style="font-size:16px">The Verge · 2025-07-09</h3>
+        <div class="who">预售开始时的报道</div>
+        <ol><li>确认首发价 $449（无线）/ $299（Lite）。</li>
+        <li>把它定位成“可爱的桌面机器人”，强调低价与开源。</li>
+        <li>同一篇里也写了“由树莓派 5 驱动”——量产版实际是 CM4。</li></ol>
+        <p style="margin:10px 0 0"><a href="https://www.theverge.com/news/702352/hugging-faces-adorable-reachy-mini-robot-is-now-available-for-preorder" target="_blank" rel="noopener">阅读原文 ↗</a></p>
+      </div>
+      <div class="path">
+        <h3 style="font-size:16px">TechCrunch · 2025-07-09</h3>
+        <div class="who">为什么要这么快发货</div>
+        <ol><li>CEO Clém Delangue 表示：<b>“重要的是下单后尽快发货，而不是搞一个时间表不明的漫长预售。”</b></li>
+        <li>定价与两款版本的定位被反复确认。</li></ol>
+        <p style="margin:10px 0 0"><a href="https://techcrunch.com/2025/07/09/hugging-face-opens-up-orders-for-its-reachy-mini-desktop-robots/" target="_blank" rel="noopener">阅读原文 ↗</a></p>
+      </div>
+      <div class="path">
+        <h3 style="font-size:16px">IEEE Spectrum · 2025-07-16</h3>
+        <div class="who">Video Friday 专栏</div>
+        <ol><li>标题直接写了“可爱过载、创意编程与 AI 实验”。</li>
+        <li>把它归入“研究者与爱好者都能玩的桌面机器人”一类。</li></ol>
+        <p style="margin:10px 0 0"><a href="https://spectrum.ieee.org/video-friday-reachy-mini" target="_blank" rel="noopener">阅读原文 ↗</a></p>
+      </div>
+      <div class="path">
+        <h3 style="font-size:16px">Hackaday · 2026-06-28</h3>
+        <div class="who">全本地对话 AI 的转折点</div>
+        <ol><li>报道了社区做出的<b>全本地对话方案</b>：VAD → STT → LLM → TTS 全部跑在本机。</li>
+        <li>LLM 用的是 <b>Qwen3-4B-Instruct</b>——对中国读者来说这是个有意思的细节：让 Reachy 说中文、且完全离线的关键模型来自国内。</li>
+        <li>原文强调它“目标是感觉自然：低延迟、可打断”。</li></ol>
+        <p style="margin:10px 0 0"><a href="https://hackaday.com/2026/06/28/reachy-mini-desktop-robot-gets-all-local-conversational-ai/" target="_blank" rel="noopener">阅读原文 ↗</a></p>
+      </div>
+      <div class="path">
+        <h3 style="font-size:16px">Seeed Studio 官方博客 · 2026-01-06</h3>
+        <div class="who">三方合作复盘</div>
+        <ol><li>Hugging Face × Pollen Robotics × Seeed Studio 的合作纪实。</li>
+        <li>解释了 Seeed 在供应链与中文文档上的角色——也是国内用户的购买渠道。</li></ol>
+        <p style="margin:10px 0 0"><a href="https://www.seeedstudio.com/blog/2026/01/06/reachy-mini-an-open-journey-built-together-with-hugging-face-pollen-robotics-seeed-studio/" target="_blank" rel="noopener">阅读原文 ↗</a></p>
+      </div>
+    </div>
+
+    <div class="notice reveal" style="border-left-color:var(--gold);margin-top:24px">
+      <b>一个值得知道的争议：开源开到了什么程度？</b><br>
+      <b>软件侧</b>很彻底：SDK 是 Apache-2.0，Python 与 JS 双端开放，应用生态完全建立在公开 Space 上。<br>
+      <b>硬件侧</b>则有保留：硬件设计文件采用 <b>CC BY-SA-NC</b>（<b>禁止商用</b>），官方 FAQ 也明确说完整 STEP 文件<b>尚未发布</b>，目前只提供部分 STL。
+      也就是说，你可以照着改、可以 3D 打印皮肤，但不能拿它做商业硬件。<br>
+      这一点在社区里被反复讨论（Hackaday 的评论区就有），也是“开源机器人”这个词在当前阶段的真实边界。
+    </div>
+
+    <div class="notice reveal" style="border-left-color:var(--sky)">
+      <b>关于奖项：</b>目前<b>没有找到任何颁发给 Reachy Mini 的奖项</b>。Pollen Robotics 团队确实拿过 ANA Avatar XPRIZE 2022 的亚军，但那是另一款遥操作机器人（Reachy 2 系列），不要混为一谈。
+      同样，官方<b>从未公布过销量或预售数字</b>——生态规模只能靠 Hub 上的 Space / 数据集数量来侧面衡量。
+    </div>
+  </div>
+</section>
+
+
+<div class="divider"></div>
+
+<!-- ================= 生态观察 ================= -->
+<section id="observe">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="num">10 / PATTERNS</div>
+      <h2>把 80 多个项目摊开看，能看到这几个规律</h2>
+      <p>这一节不是介绍单个应用，而是这套生态的“底层结构”。理解了它，你更容易想到自己该做什么。</p>
+    </div>
+    <div class="paths reveal">
+      <div class="path">
+        <h3 style="font-size:16px">① 云端大模型 vs 端侧小模型，是两条清晰的路</h3>
+        <div class="who">技术选型</div>
+        <ol>
+          <li><b>云端派</b>：官方对话应用、ElevenLabs、Gemini Live、Minder——把语音与推理交给托管服务，换来最好的对话质量，代价是联网与延迟。</li>
+          <li><b>端侧派</b>：端侧极速反应（树莓派 CPU）、Baby 陪伴（Jetson 7 模型）、Reachy Claw（ASR+TTS 约 110ms）、NVIDIA Jetson 助手（Gemma 本地）——换来隐私、离线与确定性延迟，代价是要自己搭管线。</li>
+          <li>选哪条路，先回答一个问题：<b>你更怕“不够聪明”，还是更怕“不可靠 / 不可用”？</b></li>
+        </ol>
+      </div>
+      <div class="path">
+        <h3 style="font-size:16px">② “不调用 LLM”是被反复验证的有效选择</h3>
+        <div class="who">反直觉但成立</div>
+        <ol>
+          <li>点赞第二的 <b>F1 解说员</b>根本没用大模型：210 套字符串模板 + 一个规则引擎（兴奋等级 × 叙事视角 × 防重复追踪），效果足以拿到 207 个赞。</li>
+          <li>端侧反应应用用<b>语义检索</b>替代生成，把反应压到 100ms 以内。</li>
+          <li>结论：<b>表达力来自动作设计与时机，不来自模型参数。</b>先想清楚“要它做什么反应”，再决定要不要上大模型。</li>
+        </ol>
+      </div>
+      <div class="path">
+        <h3 style="font-size:16px">③ 芯片厂商把它当成边缘 AI 的展示台</h3>
+        <div class="who">一个容易被忽略的信号</div>
+        <ol>
+          <li>生态里点赞第一（Phone Home）和两个技术标杆（3D 可视化、端侧反应）的作者，<b>都隶属 Arm</b>。</li>
+          <li><b>NVIDIA 官方</b>下场做了 Jetson 全本地助手，工程标准明显高于社区平均（SBOM、wheel 校验、拒绝静默降级）。</li>
+          <li>这说明 Reachy Mini 已经不只是一个玩具，而是被当作<b>边缘 AI 的参考平台</b>在用。</li>
+        </ol>
+      </div>
+      <div class="path">
+        <h3 style="font-size:16px">④ 9 个自由度，每个项目只用了其中一部分</h3>
+        <div class="who">设计上的克制</div>
+        <ol>
+          <li>F1 解说员<b>只用颈部 6 个自由度</b>，底座与天线不动。</li>
+          <li>AirPlay 音箱<b>只让天线打节奏</b>——因为 Stewart 平台和底座电机会在音乐里发出声音，只有天线电机几乎无声。这是很典型的机器人产品思维。</li>
+          <li>反过来，ESP32 眼睛改装干脆绕开原厂所有灯光，自己做一套视觉通道。</li>
+        </ol>
+      </div>
+      <div class="path">
+        <h3 style="font-size:16px">⑤ 开源协议的边界，是这个生态的真实议题</h3>
+        <div class="who">想商用必读</div>
+        <ol>
+          <li>SDK 是 <b>Apache-2.0</b>，但<b>硬件设计文件是 CC BY-SA-NC（禁止商用）</b>，完整 STEP 文件官方称“计划发布”但尚未放出。</li>
+          <li>Phone Home 依赖的 Ultralytics YOLO 是 <b>AGPL-3.0</b>，作者专门加了 NOTICE 声明。</li>
+          <li>AirPlay 音箱基于 shairport-sync 与 librespot，作者明确写了“<b>非 Apple MFi 授权、未获 Spotify 官方授权</b>”。</li>
+          <li>也有正面范例：ElevenLabs 应用的 <code>emotion_detector.py</code> 顶部完整标注了情绪触发方式源自 Pollen 官方项目并附源码链接。</li>
+        </ol>
+      </div>
+      <div class="path">
+        <h3 style="font-size:16px">⑥ 门槛最低的贡献方式，其实是“一件事做好”</h3>
+        <div class="who">给你的选题建议</div>
+        <ol>
+          <li>点赞榜上不只有硬核项目：<b>节拍器</b>（天线当摆锤）、<b>尤克里里调音器</b>、<b>天线敲击实验室</b>、<b>番茄钟</b> 都只是把一件事做透。</li>
+          <li>最有画面感的选题往往最具体：“让机器人读实体绘本给孩子听”“手机一响它就瞪我”“冲浪预报念给我听”。</li>
+          <li>反向看：通用助手类应用已经有官方与多个商业版本，<b>别从那里开始</b>。</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ================= 时间线 ================= -->
+<section id="timeline">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="num">11 / TIMELINE</div>
+      <h2>这一年多，它长成了什么样</h2>
+      <p>从 Hugging Face 收购 Pollen，到 SDK 第一个 RC，再到今天 547 个打标 Space。日期取自官方博客、GitHub Release 与 Hugging Face 元数据。</p>
+    </div>
+    <div class="tl reveal">
+      <div class="item">
+        <div class="when">2025-04-14</div>
+        <div class="what">Hugging Face 宣布收购 Pollen Robotics</div>
+        <div class="note">一家做开源机器人硬件的法国公司，进入全球最大的开源 AI 社区。Reachy Mini 正是这次结合的第一个产物。</div>
+      </div>
+      <div class="item">
+        <div class="when">2025-05</div>
+        <div class="what">原型机首次亮相（与双足人形 HopeJR 一同展出）</div>
+        <div class="note">注意：这一版原型机有“屏幕眼睛”，量产版没有——很多中文报道的错误就来自这里。</div>
+      </div>
+      <div class="item k2">
+        <div class="when">2025-07-09</div>
+        <div class="what">正式发布并开放预订：$299（Lite）/ $449（Wireless）</div>
+        <div class="note">同日被 TechCrunch、IT之家等媒体报道；官方博客上线，提出“为黑客与 AI 建造者打造的开源表达型机器人”。</div>
+      </div>
+      <div class="item k2">
+        <div class="when">2025-08 ~ 2025-09</div>
+        <div class="what">官方情绪库、舞蹈库数据集发布</div>
+        <div class="note">先有可回放的动作数据，才有后来的编舞类应用与情绪表达生态。</div>
+      </div>
+      <div class="item k2">
+        <div class="when">2025-10-15 → 10-30</div>
+        <div class="what">SDK v1.0.0rc1 → v1.0.0 转正</div>
+        <div class="note">9 自由度运动学、daemon、Python SDK 稳定下来。同月官方修正了“无线版用树莓派 5”的错误说法（实为 CM4）。</div>
+      </div>
+      <div class="item k3">
+        <div class="when">2025-11 ~ 2025-12</div>
+        <div class="what">第一批社区应用涌现</div>
+        <div class="note">控制面板、键盘遥操作、节拍器、Simon 游戏、尤克里里调音器……12 月官方发布“如何制作并发布你的 Reachy Mini 应用”博客，把发布流程标准化。</div>
+      </div>
+      <div class="item k3">
+        <div class="when">2026-01 ~ 2026-02</div>
+        <div class="what">生态第一波爆发</div>
+        <div class="note">官方对话应用、多用户远程控制、Baby 全本地陪伴、F1 解说员相继上线；NVIDIA 也发布了 Jetson 本地助手方案。Phone Home 成为第一个出圈应用。</div>
+      </div>
+      <div class="item k3">
+        <div class="when">2026-03 ~ 2026-05</div>
+        <div class="what">从“能玩”走向垂直场景</div>
+        <div class="note">接待员、零售助手、健康提醒、番茄钟、天文向导陆续出现；官方发布调试测试台、情绪/动作数据集与 AI 代理技能文档体系建设；JS SDK 于 5 月 21 日上架 npm。</div>
+      </div>
+      <div class="item k3">
+        <div class="when">2026-07-03</div>
+        <div class="what">官方调价：$399（Lite）/ $499（Wireless）</div>
+        <div class="note">首发一年后上调，官方未给出解释；欧洲区为 €350 / €435。同期官方强化 MCP 工具生态（搜索 / 天气 / 知识）。</div>
+      </div>
+      <div class="item k3">
+        <div class="when">2026-08 ~ 2026-09</div>
+        <div class="what">v1.10.0 稳定 → v1.11.0rc1，走向“生成式动作”</div>
+        <div class="note">WebRTC 应用控制、媒体栈统一、Wireless 与 Lite 功能对齐；Text-to-Motion 实验项目跑通“一句话生成新动作”；社区把端侧反应延迟压到 100ms 以内。至此带 <code>reachy_mini</code> 标签的 Space 达 547 个。</div>
+      </div>
+    </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ================= FAQ ================= -->
+<section id="faq">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="num">12 / FAQ</div>
+      <h2>新手最常问的几件事</h2>
+    </div>
+    <div class="reveal">
+      <details open><summary>应用装在哪里？会不会把机器人搞坏？</summary>
+        <div class="ans">应用由 daemon 以子进程方式启动，不直接碰硬件连接，也不改固件；退出后机器人回到默认姿态。无线版的应用装在 <code>/venvs/apps_venv/</code> 这个共享虚拟环境里。
+        <b>唯一要注意的是存储</b>——无线版只有 16GB eMMC，装太多应用或缓存视频容易满，社区里有专门的“存储管家”应用可以清理。</div></details>
+      <details><summary>没有实体机器人，能先玩吗？</summary>
+        <div class="ans">可以，而且强烈建议先这样。官方 SDK 自带 <b>MuJoCo 仿真</b>：<code>mjpython -m reachy_mini.daemon.app.main --sim</code>。
+        社区还有纯浏览器的仿真器（<b>Reachy Mini JS</b>、<b>Microduck + Reachy Simulator</b>）以及不接机器人的 3D 可视化工具，写代码、调动作都用得上。</div></details>
+      <details><summary>对话应用那么多版本，该装哪个？</summary>
+        <div class="ans">先装<b>官方对话应用</b>建立基线，再按需求换：要长期记忆 + MCP 工具选 <b>Gemini Live 版</b>；要最好的音色与情感表达选 <b>ElevenLabs 版</b>；要隐私与离线选 <b>端侧极速反应</b>（它不做完整对话，但完全本地）；要在 Jetson 上全本地跑选 <b>NVIDIA Jetson 助手</b>。</div></details>
+      <details><summary>能不能让它做我自己的事（比如看家、提醒、播报）？</summary>
+        <div class="ans">能，而且这是社区最主流的玩法。两条路：① 基于官方对话应用 <b>换 profile / 加工具</b>（<code>reachy-mini-app-assistant create --template conversation</code>），适合“加一个新能力”；② 直接写控制环（<code>set_target</code> + 50Hz），适合“做一个新反应”。社区的 Phone Home、Receptionist、Minder、Astronomer 都是这两条路的产物。</div></details>
+      <details><summary>性能上限在哪？能跑多大的模型？</summary>
+        <div class="ans">取决于算力放在哪。无线版机载 CM4 只适合轻量端侧模型（Silero、Moonshine、MiniLM 这个量级）；Lite 版或无线版 + 外部电脑/Jetson 才能跑到 Whisper + VLM 甚至多模型流水线。社区的 Baby 陪伴项目用 Mac + Jetson Orin NX 跑了 7 个模型——这是目前公开案例里的上限参考。</div></details>
+      <details><summary>怎么让我的应用出现在官方应用商店里？</summary>
+        <div class="ans">发布到 Hugging Face Space，并在 README frontmatter 里加标签 <code>reachy_mini_python_app</code>（Python 应用）或 <code>reachy_mini_js_app</code>（浏览器应用）。
+        用 CLI 的 <code>reachy-mini-app-assistant create --publish</code> 会自动处理这些元数据。发布后，别人的机器人控制面板里就能看到你的应用并一键安装。</div></details>
+      <details><summary>在中国大陆用，最容易卡在哪一步？</summary>
+        <div class="ans">三个地方：① <b>应用商店与模型下载慢</b>——把 <code>HF_ENDPOINT</code> 指向官方 FAQ 推荐的镜像；② <b>对话应用连不上</b>——它依赖境外的实时语音 API，官方建议用 VPN/代理，且推荐按域名分流（只代理 <code>huggingface.co</code> 与 <code>api.openai.com</code>）；③ <b>开了代理机器人就失联</b>——要把内网网段与 22 / 8000 / 5353 端口排除，否则 <code>reachy-mini.local</code> 找不到。详见上面第 08 节。
+        想彻底绕开网络问题，可以先用全本地方案：端侧极速反应（树莓派）、Baby 全本地陪伴（Jetson）、NVIDIA Jetson 助手。</div></details>
+      <details><summary>社区在哪里？遇到问题去哪问？</summary>
+        <div class="ans">官方 Discord（Pollen 社区）、Hugging Face 上各 Space 的评论区、以及 GitHub Issues。中文用户还可以看 <b>Reachy Mini Developer Guide</b>（HP 工程师写的实战踩坑指南）和官方的 <b>Troubleshooting &amp; FAQ</b> 文档。</div></details>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div style="font-size:15px;color:var(--tx2);font-weight:600">Reachy Mini 社区应用图鉴</div>
+    <p style="max-width:80ch">本文是社区内容研究整理，不是官方文档。硬件规格与代码片段来自官方 SDK 仓库与文档；应用描述、点赞数与项目细节来自各 Hugging Face Space 的 README、源码文件与 Spaces API（抓取于 2026-09-18）。点赞数会随时间变化，请以线上为准。</p>
+    <div class="links">
+      <a href="https://github.com/pollen-robotics/reachy_mini" target="_blank" rel="noopener">官方 SDK 仓库</a>
+      <a href="https://huggingface.co/docs/reachy_mini/" target="_blank" rel="noopener">官方文档</a>
+      <a href="https://huggingface.co/spaces?q=reachy+mini" target="_blank" rel="noopener">Spaces 应用搜索</a>
+      <a href="https://huggingface.co/blog/reachy-mini" target="_blank" rel="noopener">Reachy Mini 发布博客</a>
+      <a href="https://huggingface.co/blog/pollen-robotics/make-and-publish-your-reachy-mini-apps" target="_blank" rel="noopener">发布你自己的应用</a>
+      <a href="https://github.com/pollen-robotics/reachy_mini_dances_library" target="_blank" rel="noopener">官方舞蹈库</a>
+      <a href="https://www.pollen-robotics.com/reachy-mini/" target="_blank" rel="noopener">Pollen Robotics</a>
+      <a href="https://discord.gg/HDrGY9eJHt" target="_blank" rel="noopener">Discord 社区</a>
+    </div>
+    <p style="color:var(--tx3)">图片版权归各自项目作者所有，此处仅作研究性引用。应用卡片图为 Hugging Face Space 社交预览图。</p>
+  </div>
+</footer>
+
+<div id="lb"><span class="x">✕</span><img alt=""></div>
+
+<script>
+(function(){
+  /* 图片灯箱 */
+  var lb=document.getElementById('lb'), lbi=lb.querySelector('img');
+  document.addEventListener('click',function(e){
+    var t=e.target;
+    if(t.dataset && t.dataset.zoom){
+      lbi.src=t.src; lb.classList.add('on'); e.preventDefault();
+    }
+  });
+  lb.addEventListener('click',function(){lb.classList.remove('on');lbi.src='';});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')lb.classList.remove('on');});
+
+  /* 滚动进入动画 */
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}});
+  },{rootMargin:'0px 0px -8% 0px',threshold:.08});
+  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+  var ch=document.getElementById('chart');
+  if(ch){var io2=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){ch.classList.add('in');io2.disconnect();}});},{threshold:.3});io2.observe(ch);}
+
+  /* 分类筛选 */
+  var fbtns=[].slice.call(document.querySelectorAll('#filters button'));
+  var cards=[].slice.call(document.querySelectorAll('#cards .card')).concat([].slice.call(document.querySelectorAll('#featgrid .card')));
+  fbtns.forEach(function(b){
+    b.addEventListener('click',function(){
+      fbtns.forEach(function(x){x.classList.remove('on');}); b.classList.add('on');
+      var f=b.dataset.f;
+      cards.forEach(function(c){ c.classList.toggle('hide', f!=='all' && c.dataset.cat!==f); });
+    });
+  });
+
+  /* Tab 切换 */
+  var tbtns=[].slice.call(document.querySelectorAll('#tabs button'));
+  tbtns.forEach(function(b){
+    b.addEventListener('click',function(){
+      tbtns.forEach(function(x){x.classList.remove('on');}); b.classList.add('on');
+      document.querySelectorAll('.tabpane').forEach(function(p){p.classList.remove('on');});
+      var el=document.getElementById(b.dataset.t); if(el)el.classList.add('on');
+    });
+  });
+
+  /* 复制按钮 */
+  document.querySelectorAll('.copybtn').forEach(function(b){
+    b.addEventListener('click',function(){
+      var code=b.parentElement.querySelector('code');
+      if(!code)return;
+      var txt=code.innerText;
+      var done=function(){var o=b.textContent;b.textContent='已复制 ✓';setTimeout(function(){b.textContent=o;},1400);};
+      if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(done,function(){fallback(txt,done);});}
+      else fallback(txt,done);
+    });
+  });
+  function fallback(txt,cb){
+    var ta=document.createElement('textarea'); ta.value=txt; ta.style.position='fixed'; ta.style.opacity='0';
+    document.body.appendChild(ta); ta.select();
+    try{document.execCommand('copy');cb();}catch(e){}
+    document.body.removeChild(ta);
+  }
+})();
+</script>
+</body>
+</html>
